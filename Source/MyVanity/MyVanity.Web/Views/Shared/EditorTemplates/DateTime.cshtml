@@ -1,0 +1,18 @@
+﻿@using MyVanity.Common
+@model DateTime?
+           
+@{
+    DateTime date;
+    var isValidDate = DateTime.TryParse(Model.ToString(), out date);
+
+    if (isValidDate && date != DateTime.MinValue)
+    {
+        @Html.TextBox("", date.ToString(Conventions.ShortDateFormat), new { @class = "datetime" })
+    }
+    else
+    {
+        @Html.TextBox("", "", new { @class = "datetime" })
+    }
+}
+
+

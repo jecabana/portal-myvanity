@@ -1,0 +1,7 @@
+﻿@using MyVanity.Services.Membership
+<li id="patient-nav-item">@Html.ActionLink("Patients", "Index", "Patient")</li>
+@if (User.IsInRole(ApplicationRole.Admin.ToString()) || User.IsInRole(ApplicationRole.SurgicalCoordinator.ToString()))
+{
+    <li id="user-procedure-nav-item">@Html.ActionLink("Scheduled Procedures", "Index", "PatientProcedure")</li>  
+}
+

@@ -1,0 +1,28 @@
+﻿@using MyVanity.Web.Helpers.MvcHelpers
+@model MyVanity.Model.PatientModels.Impl.PatientEditModel
+
+        @Html.EditorFor(model => model.Profile)
+        
+<div class="form-group">
+    @Html.RequiredLabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Email, new { type = "email" })
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+</div>
+
+@Html.EditorFor(model => model.Contact)
+
+<div class="form-group">
+    @Html.RequiredLabelFor(model => model.PatientNumber, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.PatientNumber)
+        @Html.ValidationMessageFor(model => model.PatientNumber)
+    </div>
+</div>
+
+        
+
+
+
+
