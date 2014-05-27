@@ -15,7 +15,8 @@ namespace MyVanity.Web.Controllers
         private readonly IViewRepository<DoctorEditModel> _doctorViewRepository;
         private readonly IReportCalculationService _reportService;
 
-        public AdminController(IMembershipService membershipService, IViewRepository<DoctorEditModel> doctorViewRepository, IBlobStore blobStore, IReportCalculationService reportService) : base(membershipService, blobStore)
+        public AdminController(IMembershipService membershipService, IViewRepository<DoctorEditModel> doctorViewRepository, 
+                               IBlobStore blobStore, IReportCalculationService reportService) : base(membershipService, blobStore)
         {
             _doctorViewRepository = doctorViewRepository;
             _reportService = reportService;

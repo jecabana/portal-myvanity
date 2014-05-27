@@ -38,31 +38,36 @@ namespace MyVanity.Web.MvcHelpers
             var sb = new StringBuilder();
 
             sb.AppendLine("<div class=\"paging\" id=\"pager\">");
-            sb.AppendLine(" <div class=\"resultsPerPage\">");
-            sb.AppendLine("     <span>Results per page: </span>");
+            sb.AppendLine("<div class=\"resultsPerPage\">");
+            sb.AppendLine("<span>Results per page: </span>");
 
-            sb.AppendLine("     <select id=\"pageSelector\">");
+            sb.AppendLine("<select id=\"pageSelector\">");
 
             for (var i = 0; i < options.Length; i++)
                 sb.AppendFormat("<option value=\"{0}\"> {1} </option>", options[i].Item1, options[i].Item2);
 
-            sb.AppendLine("     </select>");
-            sb.AppendLine(" </div>");
+            sb.AppendLine("</select>");
+            sb.AppendLine("</div>");
 
-            sb.AppendLine("     <div class=\"pagingDesc\">");
-            sb.AppendFormat("     Page {0} of {1}", pageModel.Page + 1, pageModel.TotalPages + 1);
-            sb.AppendLine("     </div>");
+            sb.AppendLine("<div class=\"pagingDesc\">");
+            sb.AppendFormat("Page {0} of {1}", pageModel.Page + 1, pageModel.TotalPages + 1);
+            sb.AppendLine("</div>");
 
+            sb.AppendLine("<ul class=\"pagination\">");
             for (var i = 0; i < pageModel.TotalPages + 1; i++)
             {
                 var number = i.ToString();
                 var page = (i + 1).ToString();
-                var selected = i == pageModel.Page - 1;
-                var selectedClass = selected ? "pagingButton selected" : "pagingButton";
+                var selected = i == pageModel.Page;
+                var selectedClass = selected ? " class=\"active\"" : string.Empty;
 
-                var button = helper.ActionLink(page, view, controller, new { size = pageModel.PageSize, page = i }, new { @class = selectedClass, data_page = number });
+                var button = helper.ActionLink(page, view, controller, new { pageSize = pageModel.PageSize, page = i }, new { data_page = number });
+                sb.AppendLine("<li" + selectedClass + ">");
                 sb.AppendLine(button.ToHtmlString());
+                sb.AppendLine("</li>");
             }
+            sb.AppendLine("</ul>");
+
             sb.AppendLine("</div>");
 
             return new MvcHtmlString(sb.ToString());

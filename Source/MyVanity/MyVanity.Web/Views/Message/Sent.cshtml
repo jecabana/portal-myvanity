@@ -1,4 +1,5 @@
-﻿@model MyVanity.Model.MessageModels.MessageIndexModel
+﻿@using MyVanity.Web.MvcHelpers
+@model MyVanity.Model.MessageModels.MessageIndexModel
 
 <p>
     <a href="@Url.Action("Compose")" class="btn btn-default">
@@ -7,11 +8,24 @@
 </p>
 
 
-@Html.DisplayFor(model => model.Messages, "MessageList")
+@Html.DisplayFor(model => model.Items, "MessageList")
+
+@if (Model.Items.Any())
+{
+   @Html.Pager(Model, "Message", "Sent")  
+}
 
 @section scripts{
     <script>
-        $("#sent-nav-item").addClass("active");
-        $("#messages-management-nav-item").addClass("active");
+        $(function() {
+            $("#sent-nav-item").addClass("active");
+            $("#messages-management-nav-item").addClass("active");
+
+            $("#pager").pager({
+                pageSelector: "#pageSelector",
+                currentPage: @Model.Page,
+                pageSize: @Model.PageSize 
+            });
+        })
     </script>
 }

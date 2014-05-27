@@ -26,7 +26,7 @@ form {
     font-size: 1.1em;
 }
 
-textarea, input[type=text],input[type=email],input[type=phone],input[type=password], select {
+.form-group textarea,.form-group input[type=text],.form-group input[type=email],.form-group input[type=phone],.form-group input[type=password],.form-group select {
     width: 20%;
     max-width: 20%;
 }
@@ -223,33 +223,6 @@ input[type="checkbox"].input-validation-error {
   margin-bottom: 0.5em;
 }
 
-.pagingButton:link, .pagingButton:visited, .pagingButton:hover, .pagingButton:active, .pagingButtonSelected, .pagingButtonSelected:link, .pagingButtonSelected:visited, .pagingButtonSelected:hover, .pagingButtonSelected:active {
-  -webkit-border-radius: 2px;
-  border-radius: 2px;
-  background-color: #999999;
-  display: block;
-  float: left;
-  padding: 0.1em 0.6em;
-  color: #fff;
-  font-size: 0.9em;
-  text-decoration: none;
-  margin: 0 0.3em 0.3em 0;
-  border: 1px solid #999;
-}
-
-.pagingButton:hover {
-  background-color: #666666;
-}
-
-.pagingButtonSelected, .pagingButtonSelected:link, .pagingButtonSelected:visited, .pagingButtonSelected:hover, .pagingButtonSelected:active {
-  background-color: #fff;
-  color: #999;
-}
-
-.pagingButtonSelected:hover {
-  background-color: #fff;
-}
-
 .pageSize {
   display: block;
   margin-top: 10px;
@@ -270,6 +243,7 @@ input[type="checkbox"].input-validation-error {
   text-align: right;
   margin-bottom: 20px;
 }
+
 .resultsPerPage span {
   display: inline-block;
   margin: 0.1em 0.5em 0 0;

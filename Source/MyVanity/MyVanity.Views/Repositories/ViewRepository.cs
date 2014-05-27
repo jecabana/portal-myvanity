@@ -16,7 +16,7 @@ namespace MyVanity.Views.Repositories
     public class ViewRepository<TEntity, TModel> : IViewRepository<TModel> where TModel : ModelBase where TEntity : class, IEntity
     {
         private readonly IModelConverter<TEntity, TModel> _modelConverter;
-        protected readonly IUnitOfWork UnitOfWork; 
+        protected readonly IUnitOfWork UnitOfWork;
 
         public ViewRepository(IModelConverter<TEntity, TModel> modelConverter, IUnitOfWork unitOfWork)
         {
@@ -42,7 +42,17 @@ namespace MyVanity.Views.Repositories
                    };
         }
 
-        public virtual PagedResult<IEnumerable<TEntity>> Filter(TypedFilter<TEntity> filter)
+        protected PagedResult<IEnumerable<TModel>> FilterModel(TypedFilter<TEntity> filter)
+        {
+            var filtered = Filter(filter);
+
+            return new PagedResult<IEnumerable<TModel>>(filtered.PageSize, filtered.PageNumber, filtered.TotalItems, filtered.TotalPages)
+                   {
+                       Result = filtered.Result.Select(x => _modelConverter.ConvertToModel(x))
+                   };
+        }
+
+        private PagedResult<IEnumerable<TEntity>> Filter(TypedFilter<TEntity> filter)
         {
             var repository = UnitOfWork.GetRepository<TEntity>();
 
@@ -60,7 +70,7 @@ namespace MyVanity.Views.Repositories
                     Result = new List<TEntity>()
                 };
 
-            var totalPages = total / pageSize;
+            var totalPages = total == pageSize ? 0 : total / pageSize;
 
             if (filter.Filter != null)
                 query = repository.Query().Where(filter.Filter);

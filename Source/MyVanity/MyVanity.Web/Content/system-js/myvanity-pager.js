@@ -23,7 +23,7 @@
             var currentUrl = window.location;
             var href = currentUrl.href.replace(currentUrl.search, "");
 
-            var search = href + "?size=" + option.value + "&page=0";
+            var search = href + "?pageSize=" + option.value + "&page=0";
             window.location = search;
         };
 

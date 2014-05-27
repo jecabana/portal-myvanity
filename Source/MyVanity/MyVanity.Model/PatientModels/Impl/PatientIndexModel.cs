@@ -1,14 +1,21 @@
 ﻿using System.Collections.Generic;
+using MyVanity.Model.Pager;
+using MyVanity.Model.Results;
 
 namespace MyVanity.Model.PatientModels.Impl
 {
-    public class PatientIndexModel
+    public class PatientIndexModel : PagedViewModel<PatientEditModel>
     {
-        public PatientIndexModel(IEnumerable<PatientEditModel> patients)
+        public PatientIndexModel(PagedResult<IEnumerable<PatientEditModel>> results)
         {
-            Patients = patients;
-        }
+            Items = results.Result;
 
-        public IEnumerable<PatientEditModel> Patients { get; set; }
+            Page = results.PageNumber;
+            PageSize = results.PageSize;
+            TotalPages = results.TotalPages;
+            TotalRecords = results.TotalItems;
+            SortMode = results.SortOrder;
+            OrderColumn = results.SortColumn;
+        }
     }
 }

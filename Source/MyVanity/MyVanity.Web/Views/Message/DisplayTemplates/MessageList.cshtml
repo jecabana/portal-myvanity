@@ -10,7 +10,7 @@
                 <div class="panel @unreadCls">
                     <div class="panel-heading">
                         <span class="panel-title">
-                            From: @Html.DisplayFor(model => item.FromUserName), To: @Html.DisplayFor(model => item.ToUserName)
+                            From: @Html.DisplayFor(model => item.FromUserName), To: @Html.DisplayFor(model => item.ToUserName) 
                         </span>
                         @*@Html.ActionLink("Delete", "Delete", "Message", new { id = item.Id }, new { @class = "btn btn-danger btn-xs pull-right" }) &nbsp;*@
                         @Html.ActionLink("Reply", "ReplyTo", "Message", new { id = item.Id }, new { @class = "btn btn-default btn-xs pull-right" })

@@ -5,8 +5,10 @@ using MyVanity.Domain;
 using MyVanity.Domain.UoW;
 using MyVanity.Model;
 using MyVanity.Model.MessageModels;
+using MyVanity.Model.Results;
 using MyVanity.Services.Membership;
 using MyVanity.Services.MessageServices;
+using MyVanity.Views.Filters;
 using MyVanity.Views.Repositories.MessageViewRepository;
 using MyVanity.Web.Controllers.Base;
 
@@ -31,24 +33,20 @@ namespace MyVanity.Web.Controllers
             _messageService = messageService;
         }
 
-        public ActionResult Inbox()
+        public ActionResult Inbox(FilterInformation info)
         {
-            var loggedUserId = CurrentUser.OwnerId;
-            var user = _unitOfWork.GetRepository<User>().FindById(loggedUserId);
+           var loggedUserId = CurrentUser.OwnerId;
+            var pagedResult = _viewRepository.GetInboxMessagesForUser(loggedUserId, info);
 
-            var inboxMessages = user.Inbox.Select(x => _modelConverter.ConvertToModel(x));
-            var model = new MessageIndexModel(inboxMessages);
-
-            return View(model);
+            return View(new MessageIndexModel(pagedResult));
         }
 
-        public ActionResult Sent()
+        public ActionResult Sent(FilterInformation info)
         {
             var loggedUserId = CurrentUser.OwnerId;
-            var user = _unitOfWork.GetRepository<User>().FindById(loggedUserId);
+            var pagedResult = _viewRepository.GetOutboxMessagesForUser(loggedUserId, info);
 
-            var sentMessages = user.Outbox.Select(x => _modelConverter.ConvertToModel(x));
-            var model = new MessageIndexModel(sentMessages);
+            var model = new MessageIndexModel(pagedResult);
 
             return View(model);
         }

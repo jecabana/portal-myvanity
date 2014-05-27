@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.Owin.Security.DataHandler.Encoder;
-using Microsoft.Practices.EnterpriseLibrary.Common.Utility;
 using MyVanity.Common;
-using MyVanity.Model;
 using MyVanity.Model.ConsentFormModels.Impl;
 using MyVanity.Services.Blobs;
 using MyVanity.Services.DocumentParser;

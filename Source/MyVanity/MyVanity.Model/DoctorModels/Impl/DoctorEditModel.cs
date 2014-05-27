@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using MyVanity.Domain;
 using MyVanity.Model.ProfileModels.Profile.Impl;
 
 namespace MyVanity.Model.DoctorModels.Impl

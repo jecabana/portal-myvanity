@@ -11,6 +11,7 @@ using MyVanity.Model;
 using MyVanity.Model.PatientModels.Impl;
 using MyVanity.Services.MailServices;
 using MyVanity.Services.Membership;
+using MyVanity.Views.Filters;
 using MyVanity.Views.Repositories.AgentViewsRepository;
 using MyVanity.Views.Repositories.PatientViewsRepository;
 using MyVanity.Web.Controllers.Base;
@@ -36,11 +37,12 @@ namespace MyVanity.Web.Controllers
             _membershipService = membershipService;
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(FilterInformation info)
         {
             var isAdmin = await _membershipService.IsInRole(CurrentUser, ApplicationRole.Admin);
-            var patients = isAdmin ? _patientViewRepository.GetAll().ToList() 
-                                   : _patientViewRepository.GetPatientsForAgent(CurrentUser.OwnerId).ToList();
+            
+            var patients = isAdmin ? _patientViewRepository.Get(info) 
+                                   : _patientViewRepository.GetPatientsForAgent(CurrentUser.OwnerId, info);
             
             var model = new PatientIndexModel(patients);
             return View(model);
@@ -132,8 +134,8 @@ namespace MyVanity.Web.Controllers
 
         public PartialViewResult GetPatients(string name)
         {
-            var patients = _patientViewRepository.GetPatientsForAgent(CurrentUser.OwnerId, name);
-            return PartialView("_PatientListPartial", patients);
+            var patients = _patientViewRepository.GetPatientsForAgent(CurrentUser.OwnerId, FilterInformation.AllItemsNoSort,name);
+            return PartialView("_PatientListPartial", patients.Result);
         }
     }
 }

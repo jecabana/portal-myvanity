@@ -8,7 +8,7 @@ namespace MyVanity.Views.Repositories.UserViewsRepository
     public class UserViewRepository<TEntity, TModel> : ViewRepository<TEntity,TModel>, IUserViewRepository<TModel> where TEntity : User 
                                                                                    where TModel  : ModelBase
     {
-        public UserViewRepository(IModelConverter<TEntity, TModel> modelConverter, IUnitOfWork unitOfWork)
+        protected UserViewRepository(IModelConverter<TEntity, TModel> modelConverter, IUnitOfWork unitOfWork)
             : base(modelConverter, unitOfWork)
         { }
 

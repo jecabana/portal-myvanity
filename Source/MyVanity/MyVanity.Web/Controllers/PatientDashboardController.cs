@@ -86,7 +86,7 @@ namespace MyVanity.Web.Controllers
                     {
                         Category = catRepository.Get(x => x.Name == "Non Medical").Single(),
                         Subcategory = subCatRepository.Get(x => x.Name == "Patient Information").Single(),
-                        ContentType = Domain.Helpers.ResolveContentTypeFromName(file.FileName),
+                        ContentType = Helpers.ResolveContentTypeFromName(file.FileName),
                         Description = description,
                         Name = file.FileName,
                         PatientId = patientId,

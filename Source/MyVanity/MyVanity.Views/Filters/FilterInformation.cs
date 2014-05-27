@@ -27,6 +27,7 @@ namespace MyVanity.Views.Filters
         /// </summary>
         public SortMode SortMode { get; set; }
 
+
         public FilterInformation()
             : this(10, 0)
         {

@@ -13,7 +13,7 @@
         @using (Html.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin", role = "form" }))
         {
             @Html.AntiForgeryToken()
-            <h2 class="form-signin-heading">@T("Please sign in now.")</h2>
+            <h2 class="form-signin-heading">@T("Please sign in.")</h2>
             @Html.ValidationSummary(true)
                 
             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "email", required = true, autofocus = true, autocapitalize = "off", autocorrect = "off" })

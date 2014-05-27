@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVanity.Web", "MyVanity.Web\MyVanity.Web.csproj", "{D85783D9-5586-4C38-93CE-F31BFB786A1A}"
 EndProject
@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{CE8ACA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVanity.Common", "MyVanity.Common\MyVanity.Common.csproj", "{D91D1192-306B-49F3-912F-32888BD2CC01}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{A66CD88F-C572-4375-A4FD-B3DD2EB28701}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C51FDFE4-5CA6-4D52-BE7B-4C7F46A4B73B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{24B8775C-A351-481E-95B7-47B5A46335E1}"
@@ -29,6 +31,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A536C5EC-8625-448E-9C11-9F3E6E633F36}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyVanity.Model", "MyVanity.Model\MyVanity.Model.csproj", "{7248E3D7-0375-4DA2-B949-C0E0CC5CF452}"
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "MyVanity.Cloud", "MyVanity.Cloud\MyVanity.Cloud.ccproj", "{F505D9D5-813F-4F77-826C-9CD5F0BD881C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{348B9C84-EAF0-4C2A-BEBF-A733940F533F}"
 EndProject
@@ -77,6 +81,12 @@ Global
 		{7248E3D7-0375-4DA2-B949-C0E0CC5CF452}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7248E3D7-0375-4DA2-B949-C0E0CC5CF452}.Staging|Any CPU.ActiveCfg = Release|Any CPU
 		{7248E3D7-0375-4DA2-B949-C0E0CC5CF452}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{F505D9D5-813F-4F77-826C-9CD5F0BD881C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F505D9D5-813F-4F77-826C-9CD5F0BD881C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F505D9D5-813F-4F77-826C-9CD5F0BD881C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F505D9D5-813F-4F77-826C-9CD5F0BD881C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F505D9D5-813F-4F77-826C-9CD5F0BD881C}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
+		{F505D9D5-813F-4F77-826C-9CD5F0BD881C}.Staging|Any CPU.Build.0 = Staging|Any CPU
 		{4470E36F-6B56-4740-8DA3-685A13EFDE58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4470E36F-6B56-4740-8DA3-685A13EFDE58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4470E36F-6B56-4740-8DA3-685A13EFDE58}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -94,10 +104,11 @@ Global
 		{5D54601B-32FD-4215-B5B2-BBE4B770A59D} = {C51FDFE4-5CA6-4D52-BE7B-4C7F46A4B73B}
 		{7248E3D7-0375-4DA2-B949-C0E0CC5CF452} = {C51FDFE4-5CA6-4D52-BE7B-4C7F46A4B73B}
 		{D91D1192-306B-49F3-912F-32888BD2CC01} = {CE8ACA56-6ADB-4956-AF90-3A2F06F095B2}
+		{F505D9D5-813F-4F77-826C-9CD5F0BD881C} = {A66CD88F-C572-4375-A4FD-B3DD2EB28701}
 		{4470E36F-6B56-4740-8DA3-685A13EFDE58} = {348B9C84-EAF0-4C2A-BEBF-A733940F533F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4;packages\EnterpriseLibrary.WindowsAzure.TransientFaultHandling.5.1.1212.0\lib\NET4;packages\EnterpriseLibrary.WindowsAzure.TransientFaultHandling.5.1.1212.0\DesignTime
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.WindowsAzure.Storage.6.0.1304.1\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\TransientFaultHandling.Core.5.1.1209.1\lib\NET4;packages\EnterpriseLibrary.WindowsAzure.TransientFaultHandling.5.1.1212.0\lib\NET4;packages\EnterpriseLibrary.WindowsAzure.TransientFaultHandling.5.1.1212.0\DesignTime
 	EndGlobalSection
 EndGlobal

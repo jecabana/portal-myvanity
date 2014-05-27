@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using MyVanity.Model.PatientModels.Impl;
+using MyVanity.Model.Results;
+using MyVanity.Views.Filters;
 using MyVanity.Views.Repositories.UserViewsRepository;
 
 namespace MyVanity.Views.Repositories.PatientViewsRepository
@@ -10,9 +12,10 @@ namespace MyVanity.Views.Repositories.PatientViewsRepository
         /// Gets the patients which belongs to the given agent
         /// </summary>
         /// <param name="agentId">Agent id</param>
-        /// /// <param name="patientName">Optional for filtering patients by name</param>
+        /// <param name="info">Filter info</param>
+        /// <param name="patientName">Optional for filtering patients by name</param>
         /// <returns></returns>
-        IEnumerable<PatientEditModel> GetPatientsForAgent(int agentId, string patientName = null);
+        PagedResult<IEnumerable<PatientEditModel>> GetPatientsForAgent(int agentId, FilterInformation info, string patientName = null);
 
         /// <summary>
         /// Assigns a new surgical coordinator to the given patient

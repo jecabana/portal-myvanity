@@ -30,21 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Build.Framework" />
-    <Reference Include="Microsoft.WindowsAzure.Storage, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="MyVanity.Web.Helpers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\MyVanity.Web.Helpers\bin\Debug\MyVanity.Web.Helpers.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountModels\AccountViewModels.cs" />
@@ -73,8 +62,8 @@
     <Compile Include="FileModels\Impl\FileEditModel.cs" />
     <Compile Include="FileModels\Impl\FileEditModelSync.cs" />
     <Compile Include="IModelConverter.cs" />
-    <Compile Include="Pager\IPagedViewModel.cs" />
     <Compile Include="LoggedUserViewModel.cs" />
+    <Compile Include="Pager\IPagedViewModel.cs" />
     <Compile Include="MessageModels\ConversationViewModel.cs" />
     <Compile Include="MessageModels\MessageEditModel.cs" />
     <Compile Include="MessageModels\MessageIndexModel.cs" />

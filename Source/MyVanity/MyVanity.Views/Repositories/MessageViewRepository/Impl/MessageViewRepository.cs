@@ -1,9 +1,13 @@
-﻿using MyVanity.Domain;
+﻿using System.Collections.Generic;
+using System.Linq;
+using MyVanity.Domain;
 using MyVanity.Domain.UoW;
 using MyVanity.Model;
 using MyVanity.Model.MessageModels;
+using MyVanity.Model.Results;
 using MyVanity.Model.UserModels;
 using MyVanity.Services.MailServices;
+using MyVanity.Views.Filters;
 
 namespace MyVanity.Views.Repositories.MessageViewRepository.Impl
 {
@@ -62,6 +66,28 @@ namespace MyVanity.Views.Repositories.MessageViewRepository.Impl
             message.RepliesTo = replyTo;
 
             return message;
+        }
+
+        public PagedResult<IEnumerable<MessageEditModel>> GetInboxMessagesForUser(int userId, FilterInformation info)
+        {
+            var filter = new TypedFilter<Message>(x => x.ToId == userId, info.PageSize, info.Page)
+                       {
+                           OrderColumn = info.OrderColumn,
+                           SortMode = info.SortMode
+                       };
+
+            return FilterModel(filter);
+        }
+
+        public PagedResult<IEnumerable<MessageEditModel>> GetOutboxMessagesForUser(int userId, FilterInformation info)
+        {
+            var filter = new TypedFilter<Message>(x => x.FromId == userId, info.PageSize, info.Page)
+                {
+                    OrderColumn = info.OrderColumn,
+                    SortMode = info.SortMode
+                };
+
+            return FilterModel(filter);
         }
     }
 }

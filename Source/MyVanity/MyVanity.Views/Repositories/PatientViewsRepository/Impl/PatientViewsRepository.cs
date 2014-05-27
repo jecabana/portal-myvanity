@@ -5,40 +5,40 @@ using MyVanity.Domain;
 using MyVanity.Domain.UoW;
 using MyVanity.Model;
 using MyVanity.Model.PatientModels.Impl;
+using MyVanity.Model.Results;
+using MyVanity.Views.Filters;
 using MyVanity.Views.Repositories.UserViewsRepository;
 
 namespace MyVanity.Views.Repositories.PatientViewsRepository.Impl
 {
     public class PatientViewsRepository : UserViewRepository<Patient, PatientEditModel>, IPatientViewRepository
     {
-        private readonly IModelConverter<Patient, PatientEditModel> _modelConverter;
         private readonly IUnitOfWork _unitOfWork;
 
         public PatientViewsRepository(IModelConverter<Patient, PatientEditModel> modelConverter, IUnitOfWork unitOfWork) : base(modelConverter, unitOfWork)
         {
-            _modelConverter = modelConverter;
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<PatientEditModel> GetPatientsForAgent(int agentId, string patientName = null)
-        {
-            var agentRepository = UnitOfWork.GetRepository<Agent>();
-            var agent = agentRepository.FindById(agentId);
-
-            var patients = agent.Patients;
+        public PagedResult<IEnumerable<PatientEditModel>> GetPatientsForAgent(int agentId, FilterInformation info , string patientName = null)
+        {   
+            var filter = new TypedFilter<Patient>(info.PageSize, info.Page)
+                         {
+                             OrderColumn = info.OrderColumn,
+                             SortMode = info.SortMode
+                         };
 
             if (!string.IsNullOrEmpty(patientName))
             {
                 patientName = patientName.ToLower();
-
-                patients = patients.Where(x => x.Profile.FirstName.IgnoreCase(patientName) ||
-                                               x.Profile.LastName.IgnoreCase(patientName) ||
-                                               x.Profile.MiddleName.IgnoreCase(patientName) ||
-                                               x.Email.IgnoreCase(patientName) ||
-                                               x.Id.ToString() == patientName).ToList();
+                filter.Filter = x => x.AgentId == agentId && (x.Profile.FirstName.IgnoreCase(patientName) ||
+                                     x.Profile.LastName.IgnoreCase(patientName) ||
+                                     x.Profile.MiddleName.IgnoreCase(patientName) ||
+                                     x.Email.IgnoreCase(patientName) ||
+                                     x.Id.ToString() == patientName);
             }
 
-            return patients.Select(x => _modelConverter.ConvertToModel(x));
+            return FilterModel(filter);
         }
 
         public void ReassignToAgent(int patientId, int agentId)
