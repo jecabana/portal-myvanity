@@ -1,0 +1,79 @@
+﻿@model MyVanity.Model.PatientDashboard.Impl.PatientDashboardViewModel
+
+@if (Model.Consents == null)
+{
+    <h4>There are no existing consents for this procedure</h4>
+    return;
+}
+
+<div class="consent-template">
+    <div class="box1">
+        <h3>PATIENT CONSENT FORMS</h3>
+        <p>By <span class="pink">granting consent </span>physicians trating you will have access to important clinical information about you that could be unavailble otherwise</p>
+    </div>
+    <div class="box2">
+        <div class="img-wrapper img-wrapper-download"></div>
+    </div>
+    
+    @{
+        var length = Model.Consents.Count();
+        
+        if (length != 0)
+        {
+            <!-- Nav tabs -->
+            <ul id="consent-tab" class="nav nav-tabs">
+                @for (int i = 0; i < length; i++)
+                {
+                    var consent = Model.Consents.ElementAt(i);
+                    var cls = consent.Signed ? "glyphicon-ok" : "glyphicon-remove";
+                    
+                    if (i == 0)
+                    {
+                        <li class="active">
+                            <a href="#consent-@i" data-toggle="tab">
+                                <span class="glyphicon  @cls"></span>FORM @(i + 1)
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="#consent-@i" data-toggle="tab">
+                                <span class="glyphicon  @cls"></span>FORM @(i + 1)
+                            </a>
+                        </li>
+                    }
+                 }
+            </ul>
+        }
+            <!-- Tab panes -->
+            <div class="tab-content">
+             @for (int i = 0; i < length; i++)
+             {
+                 var currentConsent = Model.Consents.ElementAt(i);
+                 var cls = "tab-pane";
+
+                 if (i == 0) { cls = cls + " active in fade"; }
+                 
+                 <div class="@cls" id="consent-@i">
+                     <div class="consent-form">
+                         <h5>Online Consent Form Template</h5>
+                         <h5><small>&lt;@currentConsent.ConsentTitle &gt;</small></h5>
+                         <div>@Html.Raw(currentConsent.Body)</div>
+                     </div>
+                     @if (!currentConsent.Signed)
+                     {
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" class="consent-checkbox" data-consent-toggle="consent-@i" data-consent-id="@currentConsent.Id"/>
+                                I <span class="pink">agree and consent</span> to the information contained in this form.
+                            </label>
+                        </div>   
+                     }
+                 </div>   
+             }
+        </div>
+
+    <button type="button" id="save-btn" class="btn btn-default pull-right">Save</button>
+    }
+</div>

@@ -1,0 +1,17 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<h2>You have a new notification!</h2>
+		<p>
+			The Patient <strong>@Model.PatientName</strong> has signed the Consent Form <strong>"@Model.ConsentTitle"</strong> at @Model.SignedDate : <br/> 
+			<br/>
+			
+			<strong>Patient's Procedure Details :</strong> @Model.ProcedureDetails 
+		</p>
+		<br/>
+		
+		@Raw(@MailFooter)
+	</body>
+</html>
+

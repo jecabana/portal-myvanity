@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MyVanity.Model.ConsentFormModels.Impl.ConsentReportViewModel>
+
+@if (!Model.Any())
+{
+    <h4>There are not any reports</h4>
+}
+else
+{
+    <h4>Unsigned Consents 5 days before Procedure Day</h4>
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ConsentTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProcedureName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProcedureDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MissingDays)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                var cls = string.Empty;
+                if (item.Warning)
+                {
+                    cls = "class=warning";
+                }
+                else if(item.Danger)
+                {
+                    cls = "class=danger";
+                }
+                <tr @cls>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsentTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProcedureName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProcedureDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MissingDays)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
+
+
+@section scripts{
+    <script>
+        $("#reports-nav-item").addClass("active");
+        $("#consent-reports").addClass("active");
+    </script>    
+}

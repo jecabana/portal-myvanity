@@ -1,0 +1,64 @@
+﻿@using MyVanity.Domain
+@using MyVanity.Model.ConsentFormModels.Impl
+@using MyVanity.Model.DoctorModels.Impl
+@using MyVanity.Model.FileModels.Impl
+@model MyVanity.Model.PatientProcedureModels.Impl.PatientProcedureEditModel
+
+@{
+    ViewBag.Title = "Edit Procedure";
+    Layout = "~/Views/Shared/_Layout.ManagementDashboard.cshtml";
+}
+
+<h4>@ViewBag.Title</h4>
+<hr/>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()   
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/js/edit-patient-procedure")
+
+    <script type="text/javascript">
+        $(function() {
+            $(".datetime").datepicker("option", "minDate", 0);
+
+            var module = new UserProcedureModule(
+            {
+                searchButtonId: "search-patients",
+                inputTextId: "patient-name",
+                fileNameId: "file-search-name",
+                searchFileButtonId: "file-search-id"
+            });
+            module.Init();
+
+            var vm = module.ViewModel;
+            ko.applyBindings(vm);
+
+            @{
+                var doctors = Model.AddedDoctors ?? new List<DoctorEditModel>();
+                foreach (var doctor in doctors)
+                {
+                    <text>vm.addExistingDoctor({ id: @doctor.Id, name: '@doctor.FullName' })</text>
+                }
+            }
+
+            @{
+                var files = Model.AddedFiles ?? new List<FileEditModel>();
+                foreach (var item in files)
+                {
+                    <text>vm.addFile({ id: '@item.Id', name: '@item.Name', path: '@item.Path' })</text>
+                }
+            }
+
+            @{
+                var procedureConsents = Model.SelectedConsents ?? new List<ProcedureConsentViewModel>();
+                foreach (var procedureConsent in procedureConsents)
+                {
+                    <text>vm.addExistingConsent(new vm.consent(@procedureConsent.Id, @procedureConsent.ConsentId,'@procedureConsent.ConsentTitle' ,'@procedureConsent.Signed'))</text>
+                }
+            }
+        })
+    </script>
+}

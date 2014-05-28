@@ -1,0 +1,22 @@
+﻿@model MyVanity.Model.PatientDashboard.Impl.PatientDashboardViewModel
+
+<div class="appointments-template">
+    @if (Model.Appointments != null && Model.Appointments.Count != 0)
+    {
+        <div class="box1">
+        <h4>YOU HAVE <span class="pink">@Model.Appointments.Count</span> SCHEDULED APPOINTMENTS</h4>
+    </div>
+    <div class="box2">
+        <div class="img-wrapper img-wrapper-clock"></div>
+    </div>
+        <ul class="content-list-1 list-unstyled">
+            @foreach (var appointment in Model.Appointments)
+            {
+                <li>
+                    <span class="pink">@Html.DisplayFor(model => appointment.Date)</span>@Html.DisplayFor(model => appointment.Description) - @Html.DisplayFor(model => appointment.Status)
+                </li>
+            }
+        </ul>
+    }
+    
+</div>

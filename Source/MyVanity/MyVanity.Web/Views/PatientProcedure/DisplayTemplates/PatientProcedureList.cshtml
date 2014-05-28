@@ -1,0 +1,43 @@
+﻿@using MyVanity.Services.Membership
+@model IEnumerable<MyVanity.Model.PatientProcedureModels.Impl.PatientProcedureEditModel>
+
+@if (!Model.Any())
+{
+    return;
+}
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SelectedProcedure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SelectedDoctor)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Procedure.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormattedAddedDoctors)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })    
+                </td>
+            </tr>
+        }
+    </table>
+</div>

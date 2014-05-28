@@ -1,0 +1,71 @@
+﻿@using MyVanity.Services.Membership
+@model IEnumerable<MyVanity.Model.PatientModels.Impl.PatientEditModel>
+
+@if (Model == null || !Model.Any())
+{
+    return;
+}
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Profile.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profile.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profile.MiddleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profile.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            @if (User.IsInRole(ApplicationRole.Admin.ToString()))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.AgentName)
+                </th>
+            }
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.MiddleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                @if (User.IsInRole(ApplicationRole.Admin.ToString()))
+                {
+                    <td>
+                        @Html.DisplayFor(model => item.AgentName)
+                    </td>
+                }
+                <td>
+                    @if (User.IsInRole(ApplicationRole.SurgicalCoordinator.ToString()))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) 
+                    }
+                    @*@Html.ActionLink("Delete", "Delete", new { userName = item.UserName }, new { @class = "btn btn-danger btn-sm" })*@
+                    <a href="#" data-agent-id="@item.AgentId" data-patient-id="@item.Id" class="btn btn-warning btn-sm assign-btn">Reassign to Agent</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,29 @@
+﻿@model MyVanity.Model.ConsentFormModels.Impl.ConsentFormEditModel
+
+@section styles{
+    @Styles.Render("~/Content/css/jqueryupload")
+}
+
+<h4>Import from .doc(x) file</h4>
+<hr/>
+
+ @Html.EditorForModel()
+
+@section scripts{
+    @Scripts.Render("~/Content/system-js/consent-edit-module")
+
+    <script>
+        $(document).ready(function() {
+            var module = new ConsentEditModule({
+                browseBtn: "#fileupload",
+                importBtn: "#import-btn",
+                hiddenForm: "#hidden-form",
+                consentDescription: "#consent-description",
+                fileName: "#file-name",
+                filePath: "#file-path",
+                errorField: "#file-upload-error"
+            });
+            module.Init();
+        });
+    </script>
+}

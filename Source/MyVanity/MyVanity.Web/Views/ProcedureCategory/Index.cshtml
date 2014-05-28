@@ -1,0 +1,21 @@
+﻿@model MyVanity.Model.ProcedureCategoryModels.Impl.ProcedureCategoryIndexModel
+
+@{
+    ViewBag.Title = "CategoriesList";
+}
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-default">
+        <span class="glyphicon glyphicon-plus"></span> Add Category
+    </a>
+</p>
+
+
+@Html.DisplayFor(model => model.Categories, "CategoryList")
+
+@section scripts {
+    <script type="text/javascript">
+        $("#procedure-category-nav-item").addClass("active");
+        $("#procedures-management-nav-item").addClass("active");
+    </script>
+}

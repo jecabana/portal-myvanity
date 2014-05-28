@@ -1,0 +1,49 @@
+﻿@model MyVanity.Model.ConsentFormModels.Impl.ConsentFormEditModel
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-2">
+            <span class="btn btn-info btn-sm fileinput-button">
+                <i class="glyphicon glyphicon-file"></i>
+                <span>Browse</span>
+                <input type="file" name="file" data-url="/ConsentForm/ParseConsentDoc" id="fileupload">
+            </span>
+            <button class="btn btn-info btn-sm" style="display: none;" id="import-btn" data-loading-text="Importing...">
+                <span class="glyphicon glyphicon-forward"></span> Import
+            </button>    
+        </div>
+        <div class="col-md-10">
+            <strong><span id="file-name"></span></strong>
+            <span id="file-upload-error" class="text-danger"></span>
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.FileGuid, new { id = "file-path" })
+        @Html.HiddenFor(model => model.Description, new { id = "consent-description" })
+        
+        <div style="display: none;" id="hidden-form">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title)
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+            </div>
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { id = "consent-description", style = "width: 40%;max-width: 40%;", rows = 20 })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    <div id="consent-container"></div>  
+                </div>
+            </div>
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    }
+</div>

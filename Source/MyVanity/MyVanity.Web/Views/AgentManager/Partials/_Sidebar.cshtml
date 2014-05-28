@@ -1,0 +1,26 @@
+﻿<ul class="nav nav-sidebar">
+    @Html.Partial("_SharedSidebarElements")
+
+    @if (User.IsInRole("SurgicalCoordinator"))
+    {
+        <li id="appointments-nav-item">@Html.ActionLink("Appointments", "Index", "Appointments")</li>
+    }
+
+    <li id="messages-management-nav-item" class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Messages <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li id="new-message-nav-item">@Html.ActionLink("New Message", "Compose", "Message")</li>
+            <li id="inbox-nav-item">@Html.ActionLink("Inbox", "Inbox", "Message")</li>
+            <li id="sent-nav-item">@Html.ActionLink("Sent", "Sent", "Message")</li>
+        </ul>
+    </li>
+    <li id="resources-management-nav-item" class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li id="consent-forms">@Html.ActionLink("Consent Forms", "Index", "ConsentForm")</li>
+            <li id="patient-documents">@Html.ActionLink("Uploaded By Patients", "UploadedByPatients", "Resources")</li>
+        </ul>
+    </li>
+</ul>
+
+

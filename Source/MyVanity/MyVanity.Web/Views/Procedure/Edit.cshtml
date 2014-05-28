@@ -1,0 +1,34 @@
+﻿@using MyVanity.Common
+@model MyVanity.Model.ProcedureModels.Impl.ProcedureEditModel
+
+@section styles{
+    @Styles.Render("~/Content/css/jqueryupload")
+}
+
+<h4>Edit</h4>
+<hr/>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/js/imgResizeUpload")
+
+    <script>
+        $(function() {
+            var options = {
+                inputSel: "#fileupload",
+                relPath: "@Constants.ProcedureDescriptiveImages",
+                imgTagSel: "#imgContainer",
+                inputGuidSel: "#picture-path",
+                errorSpanSel: "#file-upload-error"
+            };
+
+            var imgUploader = new ImageUploader(options);
+            imgUploader.Init();
+        })
+    </script>
+
+}

@@ -1,0 +1,13 @@
+﻿@model MyVanity.Model.ProcedureTypeModels.Impl.ProcedureTypeEditModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h4>@ViewBag.Title</h4>
+<hr/>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+}

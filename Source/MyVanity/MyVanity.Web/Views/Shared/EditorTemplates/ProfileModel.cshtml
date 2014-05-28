@@ -1,0 +1,56 @@
+﻿@using MyVanity.Web.MvcHelpers
+@model MyVanity.Model.ProfileModels.Profile.Impl.ProfileModel
+
+<h4 class="form-header">Contact Information</h4>
+
+<div class="form-group">
+    @Html.RequiredLabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.FirstName)
+        @Html.ValidationMessageFor(model => model.FirstName)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.MiddleName, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.MiddleName)
+        @Html.ValidationMessageFor(model => model.MiddleName)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.RequiredLabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.LastName)
+        @Html.ValidationMessageFor(model => model.LastName)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.DOB, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.DOB)
+        @Html.ValidationMessageFor(model => model.DOB)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.RequiredLabelFor(model => model.IsMale, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(model => model.IsMale, true)
+                Male
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(model => model.IsMale, false)
+                Female
+            </label>
+            @Html.ValidationMessageFor(model => model.IsMale)
+        </div>
+    </div>
+</div>
+

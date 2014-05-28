@@ -1,0 +1,122 @@
+﻿@model MyVanity.Model.PatientDashboard.Impl.PatientDashboardViewModel
+<div class="contact-template">
+    <div class="content-box">
+        <div class="box1">
+            <h4>WE'RE HERE FOR YOU</h4>
+            <p><span class="pink">1.800.340.4095</span> office hours M-F 9-5 EST</p>
+        </div>
+        <div class="box2">
+            <div class="img-wrapper img-wrapper-telephone"></div>
+        </div>
+    </div>
+    <div class="content-box">
+        <div class="box1">
+            <h4>MESSAGES</h4>
+        </div>
+        <div class="box2">
+            <div class="img-wrapper img-wrapper-envelope"></div>
+        </div>
+        <div class="panel panel-default inbox-messages">
+            <div class="panel-heading">
+                <span class="panel-title">
+                    @{
+                        var inboxMessages = Model.InboxMessages;
+                        var amount = inboxMessages != null ? inboxMessages.Count : 0;
+                    }
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-inbox" class="collapsed">
+                        <span class="pink">(@amount)</span>&nbsp;INBOX
+                    </a>
+                </span>
+            </div>
+            <div id="collapse-inbox" class="panel-collapse collapse" style="height: 0px;">
+                <div class="panel-body">
+                    @{
+                        if (inboxMessages != null && inboxMessages.Any())
+                        {
+                            <div class="panel panel-default inbox-messages">
+                                @foreach (var message in inboxMessages)
+                                {
+                                    <div class="panel-heading" style="padding-left: 0px;">
+                                        <button class="btn btn-info btn-xs reply-btn" data-message-id="@message.Id" data-reply-to="@message.FromUserId" style="float:right">Reply</button>
+                                        <span class="panel-title">
+                                            <span class="pink">From:</span> @message.FromUserName
+                                            @if (!message.IsRead)
+                                            {
+                                                <span class="label label-success" style="padding: .1em .5em .1em;">New</span>
+                                            }
+                                            <br />
+                                        </span>
+                                        <a data-toggle="collapse" class="message-collapse" data-message-id="@message.Id" href="#collapse-@message.Id">
+                                            <span class="pink">Subject:</span> @message.Subject<br />
+                                        </a>
+                                    </div>
+                                    <div id="collapse-@message.Id" data-toggle="collapse" class="panel-collapse collapse">
+                                        <p>
+                                            @message.Body
+                                        </p>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <span>You have no messages in the inbox</span>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default inbox-messages">
+            <div class="panel-heading">
+                <span class="panel-title">
+                    @{
+                        var sentMessages = Model.SentMessages;
+                        var sentAmount = sentMessages != null ? sentMessages.Count : 0;
+                    }
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse-outbox" class="collapsed">
+                        <span class="pink">(@sentAmount)</span>&nbsp;SENT
+                    </a>
+                </span>
+            </div>
+            <div id="collapse-outbox" class="panel-collapse collapse" style="height: 0px;">
+                <div class="panel-body">
+                    @{
+                        if (sentMessages != null && sentMessages.Any())
+                        {
+                            <div class="panel panel-default inbox-messages">
+                                @foreach (var message in sentMessages)
+                                {
+                                    <div class="panel-heading" style="padding-left: 0px;">
+                                        <span class="panel-title">
+                                            <span class="pink">To:</span> @message.ToUserName<br/>
+                                        </span>
+                                        <a data-toggle="collapse" data-message-id="@message.Id" href="#collapse-sent-@message.Id">
+                                            <span class="pink">Subject:</span> @message.Subject<br />
+                                        </a>
+                                    </div>
+                                    <div id="collapse-sent-@message.Id" data-toggle="collapse" class="panel-collapse collapse">
+                                        <p>
+                                            @message.Body
+                                        </p>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <span>You have no messages in the outbox</span>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="coordinator-box">
+            <h4><span class="pink">STAY IN CONTACT</span> WITH OUR VANITY PATIENT COORDINATOR</h4>
+            <img src="@Url.Content("~/Content/images/arrow-pink.png")" class="hidden-xs" style="width: 64px;height: 64px;"/>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit fusce vel sapien elit in malesuada semper mi, id sollicitudin urna fermentum ut fusce varius nisl ac ipsum gravida vel pretium tellus tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit.
+            </p>
+    </div>
+    

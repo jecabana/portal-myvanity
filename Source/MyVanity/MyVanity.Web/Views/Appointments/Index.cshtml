@@ -1,0 +1,32 @@
+﻿@model MyVanity.Model.AppointmentModels.Impl.AppointmentsIndexModel
+
+@{
+    ViewBag.Title = "Appointments";
+}
+
+@section styles {
+    @Styles.Render("~/Content/css/lightboxcss")
+}
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-default">
+        <span class="glyphicon glyphicon-pushpin"></span> New Appointment
+    </a>   
+</p>
+
+
+@Html.DisplayFor(model => model.Appointments, "AppointmentsList")
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/js/appointment-index")
+    
+    <script type="text/javascript">
+        $("#appointments-nav-item").addClass("active");
+
+        $(function() {
+            var app = new AppointmentIndex({ buttonSel: ".status-btn", statusSel: "#status-text" });
+            app.Init();
+        });
+    </script>           
+}
