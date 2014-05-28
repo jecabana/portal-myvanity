@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ServiceConfiguration serviceName="MyVanity.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-01.2.3">
-  <Role name="MyVanity.Web">
-    <Instances count="1" />
-    <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=xdevs;AccountKey=Um+L06BUI+GNGZpBspv1Hw69hd/IPaZnEu95mNN6R9Lk7pk4ZHxmaoklgGgFU4K93jO3XsK9gOXrDkkswFZA+w==" />
-    </ConfigurationSettings>
-  </Role>
-</ServiceConfiguration>
