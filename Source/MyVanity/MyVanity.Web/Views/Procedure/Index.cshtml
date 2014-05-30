@@ -1,0 +1,81 @@
+﻿@using MyVanity.Web.MvcHelpers
+@model MyVanity.Model.ProcedureModels.Impl.ProcedureIndexModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-default">
+        <span class="glyphicon glyphicon-paperclip"></span> New Procedure
+    </a>
+</p>
+
+@if (Model.Items.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.SortColumn(Model, "Category.Name", "Category", "Procedure", "Index")
+                </th>
+                <th>
+                    @Html.SortColumn(Model, "Type.Name", "Type", "Procedure", "Index")
+                </th>
+                <th>
+                    @Html.SortColumn(Model, "Description", "Description", "Procedure", "Index")
+                </th>
+                <th>
+                    @Html.Raw("Regular Price (USD)") 
+                </th>
+                <th>
+                    @Html.Raw("Sale Price (USD)")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegularPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalePrice)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Procedure",new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                        @*@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })*@
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    @Html.Pager(Model, "Procedure", "Index")
+}
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#procedures-nav-item").addClass("active");
+            $("#procedures-management-nav-item").addClass("active");
+
+            $("#pager").pager({
+                pageSelector: "#pageSelector",
+                currentPage: @Model.Page,
+                pageSize: @Model.PageSize,
+                buttonSelector: "ul.pagination li"
+            });
+        });
+    </script>
+}

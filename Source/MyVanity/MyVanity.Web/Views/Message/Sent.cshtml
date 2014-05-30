@@ -1,0 +1,32 @@
+﻿@using MyVanity.Web.MvcHelpers
+@model MyVanity.Model.MessageModels.MessageIndexModel
+
+<p>
+    <a href="@Url.Action("Compose")" class="btn btn-default">
+        <span class="glyphicon glyphicon-envelope"></span> Compose New
+    </a>
+</p>
+
+
+@Html.DisplayFor(model => model.Items, "MessageList")
+
+@if (Model.Items.Any())
+{
+   @Html.Pager(Model, "Message", "Sent")  
+}
+
+@section scripts{
+    <script>
+        $(function() {
+            $("#sent-nav-item").addClass("active");
+            $("#messages-management-nav-item").addClass("active");
+
+            $("#pager").pager({
+                pageSelector: "#pageSelector",
+                buttonSelector: "ul.pagination li",
+                currentPage: @Model.Page,
+                pageSize: @Model.PageSize 
+            });
+        })
+    </script>
+}

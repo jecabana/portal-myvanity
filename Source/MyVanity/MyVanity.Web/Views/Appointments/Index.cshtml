@@ -1,0 +1,86 @@
+﻿@using MyVanity.Web.MvcHelpers
+@model MyVanity.Model.AppointmentModels.Impl.AppointmentsIndexModel
+
+@{
+    ViewBag.Title = "Appointments";
+}
+
+@section styles {
+    @Styles.Render("~/Content/css/lightboxcss")
+}
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-default">
+        <span class="glyphicon glyphicon-pushpin"></span> New Appointment
+    </a>   
+</p>
+
+@if (Model.Items.Any())
+{
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.SortColumn(Model, "Date", "Date", "Appointments", "Index")
+            </th>
+            <th>
+                @Html.SortColumn(Model, "Description", "Description", "Appointments", "Index")
+            </th>
+            <th>
+                @Html.Raw("Procedure")
+            </th>
+            <th>
+                @Html.Raw("Status")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProcedureIdentifier)
+                </td>
+                <td>
+                    <span id="status-text-@item.Id">@Html.DisplayFor(modelItem => item.Status)</span>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                    <button class="btn btn-info btn-sm status-btn" data-id="@item.Id">Status</button>
+                </td>
+            </tr>
+        }
+    </table>
+</div> 
+    
+    @Html.Pager(Model, "Appointments", "Index")
+}
+
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/js/appointment-index")
+    
+    <script type="text/javascript">
+        $("#appointments-nav-item").addClass("active");
+
+        $("#pager").pager({
+            pageSelector: "#pageSelector",
+            currentPage: @Model.Page,
+            pageSize: @Model.PageSize,
+            buttonSelector: "ul.pagination li"
+        });
+
+        $(function() {
+            var app = new AppointmentIndex({ buttonSel: ".status-btn", statusSel: "#status-text" });
+            app.Init();
+        });
+    </script>           
+}

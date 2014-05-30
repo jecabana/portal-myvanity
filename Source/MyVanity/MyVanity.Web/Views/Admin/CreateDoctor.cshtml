@@ -1,0 +1,39 @@
+﻿@using MyVanity.Common
+@model MyVanity.Model.DoctorModels.Impl.DoctorEditModel
+
+@{
+    ViewBag.Title = "Create Doctor";
+}
+
+@section styles{
+    @Styles.Render("~/Content/css/jqueryupload")
+}
+
+
+<h4>@ViewBag.Title</h4>
+<hr/>
+
+@using (Html.BeginForm("CreateDoctor", "Admin", FormMethod.Post))
+{
+    @Html.EditorFor(model => model)   
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/js/imgResizeUpload")
+
+    <script>
+        $(function() {
+            var options = {
+                inputSel: "#fileupload",
+                relPath: "@Constants.DoctorPicsLocation",
+                imgTagSel: "#imgContainer",
+                inputGuidSel: "#picture-path",
+                errorSpanSel: "#file-upload-error"
+            };
+
+            var imgUploader = new ImageUploader(options);
+            imgUploader.Init();
+        })
+    </script>
+
+}

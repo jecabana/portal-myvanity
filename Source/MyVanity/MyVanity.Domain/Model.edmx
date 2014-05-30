@@ -1,0 +1,1835 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Entities.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EntitiesStoreContainer">
+    <EntitySet Name="Users" EntityType="Entities.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Messages" EntityType="Entities.Store.Messages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Procedures" EntityType="Entities.Store.Procedures" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserProcedures" EntityType="Entities.Store.UserProcedures" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents" EntityType="Entities.Store.Documents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Appointments" EntityType="Entities.Store.Appointments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProcedureCategories" EntityType="Entities.Store.ProcedureCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DocumentCategories" EntityType="Entities.Store.DocumentCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DocumentSubcategories" EntityType="Entities.Store.DocumentSubcategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProcedureTypes" EntityType="Entities.Store.ProcedureTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Doctors" EntityType="Entities.Store.Doctors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SystemConfigurations" EntityType="Entities.Store.SystemConfigurations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConsentForms" EntityType="Entities.Store.ConsentForms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reports" EntityType="Entities.Store.Reports" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserProcedureConsentSign" EntityType="Entities.Store.UserProcedureConsentSign" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Places" EntityType="Entities.Store.Places" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_Patient" EntityType="Entities.Store.Users_Patient" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents_MessageAttachment" EntityType="Entities.Store.Documents_MessageAttachment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents_PatientDocument" EntityType="Entities.Store.Documents_PatientDocument" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_Agent" EntityType="Entities.Store.Users_Agent" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents_SharedDocument" EntityType="Entities.Store.Documents_SharedDocument" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Documents_UserProcedurePatientDocument" EntityType="Entities.Store.Documents_UserProcedurePatientDocument" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users_Admin" EntityType="Entities.Store.Users_Admin" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DoctorUserProcedure" EntityType="Entities.Store.DoctorUserProcedure" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AgentUserProcedure" EntityType="Entities.Store.AgentUserProcedure" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserProcedureSharedDocument" EntityType="Entities.Store.UserProcedureSharedDocument" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="Outbox" Association="Entities.Store.SentMessages">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Notification" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="Inbox" Association="Entities.Store.Inbox">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Notification" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="PatientUserProcedure" Association="Entities.Store.PatientUserProcedure">
+      <End Role="Patient" EntitySet="Users_Patient" />
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+    </AssociationSet>
+    <AssociationSet Name="ProcedureUserProcedure" Association="Entities.Store.ProcedureUserProcedure">
+      <End Role="Procedure" EntitySet="Procedures" />
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+    </AssociationSet>
+    <AssociationSet Name="MessageAttachments" Association="Entities.Store.MessageAttachments">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="MessageAttachment" EntitySet="Documents_MessageAttachment" />
+    </AssociationSet>
+    <AssociationSet Name="PatientDocuments" Association="Entities.Store.PatientDocuments">
+      <End Role="Patient" EntitySet="Users_Patient" />
+      <End Role="PatientDocument" EntitySet="Documents_PatientDocument" />
+    </AssociationSet>
+    <AssociationSet Name="UserProcedureAppointment" Association="Entities.Store.UserProcedureAppointment">
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+      <End Role="Appointment" EntitySet="Appointments" />
+    </AssociationSet>
+    <AssociationSet Name="ProcedureCategoryProcedure" Association="Entities.Store.ProcedureCategoryProcedure">
+      <End Role="ProcedureCategory" EntitySet="ProcedureCategories" />
+      <End Role="Procedure" EntitySet="Procedures" />
+    </AssociationSet>
+    <AssociationSet Name="DocumentCategoryDocumentSubcategory" Association="Entities.Store.DocumentCategoryDocumentSubcategory">
+      <End Role="DocumentCategory" EntitySet="DocumentCategories" />
+      <End Role="DocumentSubcategory" EntitySet="DocumentSubcategories" />
+    </AssociationSet>
+    <AssociationSet Name="DocumentCategoryDocument" Association="Entities.Store.DocumentCategoryDocument">
+      <End Role="DocumentCategory" EntitySet="DocumentCategories" />
+      <End Role="Document" EntitySet="Documents" />
+    </AssociationSet>
+    <AssociationSet Name="DocumentSubcategoryDocument" Association="Entities.Store.DocumentSubcategoryDocument">
+      <End Role="DocumentSubcategory" EntitySet="DocumentSubcategories" />
+      <End Role="Document" EntitySet="Documents" />
+    </AssociationSet>
+    <AssociationSet Name="ProcedureTypeProcedure" Association="Entities.Store.ProcedureTypeProcedure">
+      <End Role="ProcedureType" EntitySet="ProcedureTypes" />
+      <End Role="Procedure" EntitySet="Procedures" />
+    </AssociationSet>
+    <AssociationSet Name="AgentPatient" Association="Entities.Store.AgentPatient">
+      <End Role="Agent" EntitySet="Users_Agent" />
+      <End Role="Patient" EntitySet="Users_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DoctorUserProcedure_Doctor" Association="Entities.Store.FK_DoctorUserProcedure_Doctor">
+      <End Role="Doctor" EntitySet="Doctors" />
+      <End Role="DoctorUserProcedure" EntitySet="DoctorUserProcedure" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DoctorUserProcedure_UserProcedure" Association="Entities.Store.FK_DoctorUserProcedure_UserProcedure">
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+      <End Role="DoctorUserProcedure" EntitySet="DoctorUserProcedure" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentUserProcedure_Agent" Association="Entities.Store.FK_AgentUserProcedure_Agent">
+      <End Role="Agent" EntitySet="Users_Agent" />
+      <End Role="AgentUserProcedure" EntitySet="AgentUserProcedure" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgentUserProcedure_UserProcedure" Association="Entities.Store.FK_AgentUserProcedure_UserProcedure">
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+      <End Role="AgentUserProcedure" EntitySet="AgentUserProcedure" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProcedureSharedDocument_UserProcedure" Association="Entities.Store.FK_UserProcedureSharedDocument_UserProcedure">
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+      <End Role="UserProcedureSharedDocument" EntitySet="UserProcedureSharedDocument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProcedureSharedDocument_SharedDocument" Association="Entities.Store.FK_UserProcedureSharedDocument_SharedDocument">
+      <End Role="SharedDocument" EntitySet="Documents_SharedDocument" />
+      <End Role="UserProcedureSharedDocument" EntitySet="UserProcedureSharedDocument" />
+    </AssociationSet>
+    <AssociationSet Name="UserProcedureUserProcedurePatientDocument" Association="Entities.Store.UserProcedureUserProcedurePatientDocument">
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+      <End Role="UserProcedurePatientDocument" EntitySet="Documents_UserProcedurePatientDocument" />
+    </AssociationSet>
+    <AssociationSet Name="PatientUserProcedurePatientDocument" Association="Entities.Store.PatientUserProcedurePatientDocument">
+      <End Role="Patient" EntitySet="Users_Patient" />
+      <End Role="UserProcedurePatientDocument" EntitySet="Documents_UserProcedurePatientDocument" />
+    </AssociationSet>
+    <AssociationSet Name="AdminReport" Association="Entities.Store.AdminReport">
+      <End Role="Admin" EntitySet="Users_Admin" />
+      <End Role="Report" EntitySet="Reports" />
+    </AssociationSet>
+    <AssociationSet Name="UserProcedureUserProcedureConsentSign" Association="Entities.Store.UserProcedureUserProcedureConsentSign">
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+      <End Role="UserProcedureConsentSign" EntitySet="UserProcedureConsentSign" />
+    </AssociationSet>
+    <AssociationSet Name="ConsentFormUserProcedureConsentSign" Association="Entities.Store.ConsentFormUserProcedureConsentSign">
+      <End Role="ConsentForm" EntitySet="ConsentForms" />
+      <End Role="UserProcedureConsentSign" EntitySet="UserProcedureConsentSign" />
+    </AssociationSet>
+    <AssociationSet Name="MessageMessage" Association="Entities.Store.MessageMessage">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="Message1" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="UserProcedurePlace" Association="Entities.Store.UserProcedurePlace">
+      <End Role="UserProcedure" EntitySet="UserProcedures" />
+      <End Role="Place" EntitySet="Places" />
+    </AssociationSet>
+    <AssociationSet Name="AppointmentPlace" Association="Entities.Store.AppointmentPlace">
+      <End Role="Appointment" EntitySet="Appointments" />
+      <End Role="Place" EntitySet="Places" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_inherits_User" Association="Entities.Store.FK_Patient_inherits_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Patient" EntitySet="Users_Patient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageAttachment_inherits_Document" Association="Entities.Store.FK_MessageAttachment_inherits_Document">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="MessageAttachment" EntitySet="Documents_MessageAttachment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientDocument_inherits_Document" Association="Entities.Store.FK_PatientDocument_inherits_Document">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="PatientDocument" EntitySet="Documents_PatientDocument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agent_inherits_User" Association="Entities.Store.FK_Agent_inherits_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Agent" EntitySet="Users_Agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SharedDocument_inherits_Document" Association="Entities.Store.FK_SharedDocument_inherits_Document">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="SharedDocument" EntitySet="Documents_SharedDocument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProcedurePatientDocument_inherits_Document" Association="Entities.Store.FK_UserProcedurePatientDocument_inherits_Document">
+      <End Role="Document" EntitySet="Documents" />
+      <End Role="UserProcedurePatientDocument" EntitySet="Documents_UserProcedurePatientDocument" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Admin_inherits_User" Association="Entities.Store.FK_Admin_inherits_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Admin" EntitySet="Users_Admin" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Body" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ToId" Type="int" Nullable="false" />
+    <Property Name="FromId" Type="int" Nullable="false" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="MessageMessage_Message1_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Procedures">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TypeId" Type="int" Nullable="false" />
+    <Property Name="RegularPrice" Type="float" Nullable="true" />
+    <Property Name="SalePrice" Type="float" Nullable="true" />
+    <Property Name="PicPath" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserProcedures">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+    <Property Name="ProcedureId" Type="int" Nullable="false" />
+    <Property Name="PlaceId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Path" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Censured" Type="bit" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="SubcategoryId" Type="int" Nullable="true" />
+    <Property Name="ContentType" Type="int" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="RealName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Appointments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserProcedureId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PlaceId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProcedureCategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentCategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentSubcategories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProcedureTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Doctors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonDetails_FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonDetails_LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonDetails_MiddleName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PersonDetails_Sex" Type="int" Nullable="false" />
+    <Property Name="PersonDetails_DOB" Type="datetime" Nullable="true" />
+    <Property Name="ProcedureId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PicPath" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="SystemConfigurations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConsentForms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FilePath" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reports">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Trigger" Type="int" Nullable="false" />
+    <Property Name="AdminId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProcedureConsentSign">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserProcedureId" Type="int" Nullable="false" />
+    <Property Name="ConsentFormId" Type="int" Nullable="false" />
+    <Property Name="Signed" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Places">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users_Patient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Profile_FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Profile_LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Profile_MiddleName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Profile_Sex" Type="int" Nullable="false" />
+    <Property Name="Profile_DOB" Type="datetime" Nullable="true" />
+    <Property Name="Contact_Phone_Home" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact_Phone_Work" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact_Phone_Mobile" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact_Social_Facebook" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact_Social_Twitter" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact_Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contact_Address1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Contact_ZipCode" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="AgentId" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PicPath" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PatientNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents_MessageAttachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="MessageId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents_PatientDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PatientId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users_Agent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="PersonDetails_FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonDetails_LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PersonDetails_MiddleName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PersonDetails_Sex" Type="int" Nullable="false" />
+    <Property Name="PersonDetails_DOB" Type="datetime" Nullable="true" />
+    <Property Name="Type" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PicPath" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents_SharedDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Documents_UserProcedurePatientDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="UserProcedureId" Type="int" Nullable="false" />
+    <Property Name="PatientId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users_Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DoctorUserProcedure">
+    <Key>
+      <PropertyRef Name="Doctors_Id" />
+      <PropertyRef Name="UserProcedures_Id" />
+    </Key>
+    <Property Name="Doctors_Id" Type="int" Nullable="false" />
+    <Property Name="UserProcedures_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AgentUserProcedure">
+    <Key>
+      <PropertyRef Name="Agents_Id" />
+      <PropertyRef Name="UserProcedures_Id" />
+    </Key>
+    <Property Name="Agents_Id" Type="int" Nullable="false" />
+    <Property Name="UserProcedures_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProcedureSharedDocument">
+    <Key>
+      <PropertyRef Name="UserProcedures_Id" />
+      <PropertyRef Name="SharedDocuments_Id" />
+    </Key>
+    <Property Name="UserProcedures_Id" Type="int" Nullable="false" />
+    <Property Name="SharedDocuments_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="SentMessages">
+    <End Role="User" Type="Entities.Store.Users" Multiplicity="1" />
+    <End Role="Notification" Type="Entities.Store.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="FromId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Inbox">
+    <End Role="User" Type="Entities.Store.Users" Multiplicity="1" />
+    <End Role="Notification" Type="Entities.Store.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="ToId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientUserProcedure">
+    <End Role="Patient" Type="Entities.Store.Users_Patient" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedure">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProcedureUserProcedure">
+    <End Role="Procedure" Type="Entities.Store.Procedures" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Procedure">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedure">
+        <PropertyRef Name="ProcedureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MessageAttachments">
+    <End Role="Message" Type="Entities.Store.Messages" Multiplicity="1" />
+    <End Role="MessageAttachment" Type="Entities.Store.Documents_MessageAttachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MessageAttachment">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientDocuments">
+    <End Role="Patient" Type="Entities.Store.Users_Patient" Multiplicity="1" />
+    <End Role="PatientDocument" Type="Entities.Store.Documents_PatientDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientDocument">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProcedureAppointment">
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Appointment" Type="Entities.Store.Appointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProcedure">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="UserProcedureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProcedureCategoryProcedure">
+    <End Role="ProcedureCategory" Type="Entities.Store.ProcedureCategories" Multiplicity="1" />
+    <End Role="Procedure" Type="Entities.Store.Procedures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProcedureCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Procedure">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DocumentCategoryDocumentSubcategory">
+    <End Role="DocumentCategory" Type="Entities.Store.DocumentCategories" Multiplicity="1" />
+    <End Role="DocumentSubcategory" Type="Entities.Store.DocumentSubcategories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DocumentSubcategory">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DocumentCategoryDocument">
+    <End Role="DocumentCategory" Type="Entities.Store.DocumentCategories" Multiplicity="1" />
+    <End Role="Document" Type="Entities.Store.Documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DocumentSubcategoryDocument">
+    <End Role="DocumentSubcategory" Type="Entities.Store.DocumentSubcategories" Multiplicity="0..1" />
+    <End Role="Document" Type="Entities.Store.Documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentSubcategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="SubcategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProcedureTypeProcedure">
+    <End Role="ProcedureType" Type="Entities.Store.ProcedureTypes" Multiplicity="1" />
+    <End Role="Procedure" Type="Entities.Store.Procedures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProcedureType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Procedure">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AgentPatient">
+    <End Role="Agent" Type="Entities.Store.Users_Agent" Multiplicity="1" />
+    <End Role="Patient" Type="Entities.Store.Users_Patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProcedureUserProcedurePatientDocument">
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="1" />
+    <End Role="UserProcedurePatientDocument" Type="Entities.Store.Documents_UserProcedurePatientDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProcedure">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedurePatientDocument">
+        <PropertyRef Name="UserProcedureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PatientUserProcedurePatientDocument">
+    <End Role="Patient" Type="Entities.Store.Users_Patient" Multiplicity="1" />
+    <End Role="UserProcedurePatientDocument" Type="Entities.Store.Documents_UserProcedurePatientDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedurePatientDocument">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AdminReport">
+    <End Role="Admin" Type="Entities.Store.Users_Admin" Multiplicity="1" />
+    <End Role="Report" Type="Entities.Store.Reports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProcedureUserProcedureConsentSign">
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserProcedureConsentSign" Type="Entities.Store.UserProcedureConsentSign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProcedure">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedureConsentSign">
+        <PropertyRef Name="UserProcedureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ConsentFormUserProcedureConsentSign">
+    <End Role="ConsentForm" Type="Entities.Store.ConsentForms" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserProcedureConsentSign" Type="Entities.Store.UserProcedureConsentSign" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsentForm">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedureConsentSign">
+        <PropertyRef Name="ConsentFormId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MessageMessage">
+    <End Role="Message" Type="Entities.Store.Messages" Multiplicity="0..1" />
+    <End Role="Message1" Type="Entities.Store.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Message1">
+        <PropertyRef Name="MessageMessage_Message1_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserProcedurePlace">
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="*" />
+    <End Role="Place" Type="Entities.Store.Places" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedure">
+        <PropertyRef Name="PlaceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AppointmentPlace">
+    <End Role="Appointment" Type="Entities.Store.Appointments" Multiplicity="*" />
+    <End Role="Place" Type="Entities.Store.Places" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Place">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="PlaceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DoctorUserProcedure_Doctor">
+    <End Role="Doctor" Type="Entities.Store.Doctors" Multiplicity="1" />
+    <End Role="DoctorUserProcedure" Type="Entities.Store.DoctorUserProcedure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DoctorUserProcedure">
+        <PropertyRef Name="Doctors_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DoctorUserProcedure_UserProcedure">
+    <End Role="DoctorUserProcedure" Type="Entities.Store.DoctorUserProcedure" Multiplicity="*" />
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProcedure">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DoctorUserProcedure">
+        <PropertyRef Name="UserProcedures_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentUserProcedure_Agent">
+    <End Role="Agent" Type="Entities.Store.Users_Agent" Multiplicity="1" />
+    <End Role="AgentUserProcedure" Type="Entities.Store.AgentUserProcedure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgentUserProcedure">
+        <PropertyRef Name="Agents_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgentUserProcedure_UserProcedure">
+    <End Role="AgentUserProcedure" Type="Entities.Store.AgentUserProcedure" Multiplicity="*" />
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="UserProcedure">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgentUserProcedure">
+        <PropertyRef Name="UserProcedures_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProcedureSharedDocument_UserProcedure">
+    <End Role="UserProcedure" Type="Entities.Store.UserProcedures" Multiplicity="1" />
+    <End Role="UserProcedureSharedDocument" Type="Entities.Store.UserProcedureSharedDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProcedure">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedureSharedDocument">
+        <PropertyRef Name="UserProcedures_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProcedureSharedDocument_SharedDocument">
+    <End Role="UserProcedureSharedDocument" Type="Entities.Store.UserProcedureSharedDocument" Multiplicity="*" />
+    <End Role="SharedDocument" Type="Entities.Store.Documents_SharedDocument" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="SharedDocument">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedureSharedDocument">
+        <PropertyRef Name="SharedDocuments_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_inherits_User">
+    <End Role="User" Type="Entities.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Patient" Type="Entities.Store.Users_Patient" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageAttachment_inherits_Document">
+    <End Role="Document" Type="Entities.Store.Documents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MessageAttachment" Type="Entities.Store.Documents_MessageAttachment" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MessageAttachment">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientDocument_inherits_Document">
+    <End Role="Document" Type="Entities.Store.Documents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PatientDocument" Type="Entities.Store.Documents_PatientDocument" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientDocument">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agent_inherits_User">
+    <End Role="User" Type="Entities.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Agent" Type="Entities.Store.Users_Agent" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SharedDocument_inherits_Document">
+    <End Role="Document" Type="Entities.Store.Documents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SharedDocument" Type="Entities.Store.Documents_SharedDocument" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SharedDocument">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProcedurePatientDocument_inherits_Document">
+    <End Role="Document" Type="Entities.Store.Documents" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserProcedurePatientDocument" Type="Entities.Store.Documents_UserProcedurePatientDocument" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Document">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserProcedurePatientDocument">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Admin_inherits_User">
+    <End Role="User" Type="Entities.Store.Users" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Admin" Type="Entities.Store.Users_Admin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Entities" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="Entities.User" />
+          <EntitySet Name="Messages" EntityType="Entities.Message" />
+          <AssociationSet Name="Outbox" Association="Entities.SentMessages">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="Inbox" Association="Entities.Inbox">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Messages" />
+          </AssociationSet>
+          <EntitySet Name="Procedures" EntityType="Entities.Procedure" />
+          <EntitySet Name="UserProcedures" EntityType="Entities.UserProcedure" />
+          <AssociationSet Name="PatientUserProcedure" Association="Entities.PatientUserProcedure">
+            <End Role="Patient" EntitySet="Users" />
+            <End Role="UserProcedure" EntitySet="UserProcedures" />
+          </AssociationSet>
+          <AssociationSet Name="ProcedureUserProcedure" Association="Entities.ProcedureUserProcedure">
+            <End Role="Procedure" EntitySet="Procedures" />
+            <End Role="UserProcedure" EntitySet="UserProcedures" />
+          </AssociationSet>
+          <EntitySet Name="Documents" EntityType="Entities.Document" />
+          <AssociationSet Name="MessageAttachments" Association="Entities.MessageAttachments">
+            <End Role="Message" EntitySet="Messages" />
+            <End Role="MessageAttachment" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="PatientDocuments" Association="Entities.PatientDocuments">
+            <End Role="Patient" EntitySet="Users" />
+            <End Role="PatientDocument" EntitySet="Documents" />
+          </AssociationSet>
+          <EntitySet Name="Appointments" EntityType="Entities.Appointment" />
+          <AssociationSet Name="UserProcedureAppointment" Association="Entities.UserProcedureAppointment">
+            <End Role="UserProcedure" EntitySet="UserProcedures" />
+            <End Role="Appointment" EntitySet="Appointments" />
+          </AssociationSet>
+          <EntitySet Name="ProcedureCategories" EntityType="Entities.ProcedureCategory" />
+          <AssociationSet Name="ProcedureCategoryProcedure" Association="Entities.ProcedureCategoryProcedure">
+            <End Role="ProcedureCategory" EntitySet="ProcedureCategories" />
+            <End Role="Procedure" EntitySet="Procedures" />
+          </AssociationSet>
+          <EntitySet Name="DocumentCategories" EntityType="Entities.DocumentCategory" />
+          <EntitySet Name="DocumentSubcategories" EntityType="Entities.DocumentSubcategory" />
+          <AssociationSet Name="DocumentCategoryDocumentSubcategory" Association="Entities.DocumentCategoryDocumentSubcategory">
+            <End Role="DocumentCategory" EntitySet="DocumentCategories" />
+            <End Role="DocumentSubcategory" EntitySet="DocumentSubcategories" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentCategoryDocument" Association="Entities.DocumentCategoryDocument">
+            <End Role="DocumentCategory" EntitySet="DocumentCategories" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="DocumentSubcategoryDocument" Association="Entities.DocumentSubcategoryDocument">
+            <End Role="DocumentSubcategory" EntitySet="DocumentSubcategories" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
+          <EntitySet Name="ProcedureTypes" EntityType="Entities.ProcedureType" />
+          <AssociationSet Name="ProcedureTypeProcedure" Association="Entities.ProcedureTypeProcedure">
+            <End Role="ProcedureType" EntitySet="ProcedureTypes" />
+            <End Role="Procedure" EntitySet="Procedures" />
+          </AssociationSet>
+          <AssociationSet Name="AgentPatient" Association="Entities.AgentPatient">
+            <End Role="Agent" EntitySet="Users" />
+            <End Role="Patient" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Doctors" EntityType="Entities.Doctor" />
+          <AssociationSet Name="DoctorUserProcedure" Association="Entities.DoctorUserProcedure">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="UserProcedure" EntitySet="UserProcedures" />
+          </AssociationSet>
+          <EntitySet Name="SystemConfigurations" EntityType="Entities.SystemConfiguration" />
+          <AssociationSet Name="AgentUserProcedure" Association="Entities.AgentUserProcedure">
+            <End Role="Agent" EntitySet="Users" />
+            <End Role="UserProcedure" EntitySet="UserProcedures" />
+          </AssociationSet>
+          <AssociationSet Name="UserProcedureSharedDocument" Association="Entities.UserProcedureSharedDocument">
+            <End EntitySet="UserProcedures" Role="UserProcedure" />
+            <End EntitySet="Documents" Role="SharedDocument" />
+          </AssociationSet>
+          <AssociationSet Name="UserProcedureUserProcedurePatientDocument" Association="Entities.UserProcedureUserProcedurePatientDocument">
+            <End Role="UserProcedure" EntitySet="UserProcedures" />
+            <End Role="UserProcedurePatientDocument" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="PatientUserProcedurePatientDocument" Association="Entities.PatientUserProcedurePatientDocument">
+            <End Role="Patient" EntitySet="Users" />
+            <End Role="UserProcedurePatientDocument" EntitySet="Documents" />
+          </AssociationSet>
+          <EntitySet Name="ConsentForms" EntityType="Entities.ConsentForm" />
+          <EntitySet Name="Reports" EntityType="Entities.Report" />
+          <AssociationSet Name="AdminReport" Association="Entities.AdminReport">
+            <End Role="Admin" EntitySet="Users" />
+            <End Role="Report" EntitySet="Reports" />
+          </AssociationSet>
+          <EntitySet Name="UserProcedureConsentSign" EntityType="Entities.UserProcedureConsentSign" />
+          <AssociationSet Name="UserProcedureUserProcedureConsentSign" Association="Entities.UserProcedureUserProcedureConsentSign">
+            <End Role="UserProcedure" EntitySet="UserProcedures" />
+            <End Role="UserProcedureConsentSign" EntitySet="UserProcedureConsentSign" />
+          </AssociationSet>
+          <AssociationSet Name="ConsentFormUserProcedureConsentSign" Association="Entities.ConsentFormUserProcedureConsentSign">
+            <End Role="ConsentForm" EntitySet="ConsentForms" />
+            <End Role="UserProcedureConsentSign" EntitySet="UserProcedureConsentSign" />
+          </AssociationSet>
+          <AssociationSet Name="MessageMessage" Association="Entities.MessageMessage">
+            <End Role="Message" EntitySet="Messages" />
+            <End Role="Message1" EntitySet="Messages" />
+          </AssociationSet>
+          <EntitySet Name="Places" EntityType="Entities.Place" />
+          <AssociationSet Name="UserProcedurePlace" Association="Entities.UserProcedurePlace">
+            <End Role="UserProcedure" EntitySet="UserProcedures" />
+            <End Role="Place" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="AppointmentPlace" Association="Entities.AppointmentPlace">
+            <End Role="Appointment" EntitySet="Appointments" />
+            <End Role="Place" EntitySet="Places" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="User" Abstract="true">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Outbox" Relationship="Entities.SentMessages" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="Inbox" Relationship="Entities.Inbox" FromRole="User" ToRole="Notification" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Admin" BaseType="Entities.User" >
+          <NavigationProperty Name="Reports" Relationship="Entities.AdminReport" FromRole="Admin" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="Agent" BaseType="Entities.User" >
+          <Property Name="PersonDetails" Type="Entities.PersonDetails" Nullable="false" />
+          <NavigationProperty Name="Patients" Relationship="Entities.AgentPatient" FromRole="Agent" ToRole="Patient" />
+          <Property Name="Type" Type="Entities.AgentType" Nullable="false" />
+          <NavigationProperty Name="UserProcedures" Relationship="Entities.AgentUserProcedure" FromRole="Agent" ToRole="UserProcedure" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="PicPath" Type="String" Nullable="true" />
+          <Property Name="Description" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patient" BaseType="Entities.User" >
+          <NavigationProperty Name="Procedures" Relationship="Entities.PatientUserProcedure" FromRole="Patient" ToRole="UserProcedure" />
+          <NavigationProperty Name="Documents" Relationship="Entities.PatientDocuments" FromRole="Patient" ToRole="PatientDocument" />
+          <Property Name="Profile" Type="Entities.PersonDetails" Nullable="false" />
+          <Property Name="Contact" Type="Entities.Contact" Nullable="false" />
+          <NavigationProperty Name="Agent" Relationship="Entities.AgentPatient" FromRole="Patient" ToRole="Agent" />
+          <Property Name="AgentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserProcedurePatientDocuments" Relationship="Entities.PatientUserProcedurePatientDocument" FromRole="Patient" ToRole="UserProcedurePatientDocument" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="PicPath" Type="String" Nullable="true" />
+          <Property Name="PatientNumber" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" Nullable="false" />
+          <Property Name="Body" Type="String" Nullable="true" />
+          <Property Name="ToId" Type="Int32" Nullable="false" />
+          <Property Name="FromId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="From" Relationship="Entities.SentMessages" FromRole="Notification" ToRole="User" />
+          <NavigationProperty Name="To" Relationship="Entities.Inbox" FromRole="Notification" ToRole="User" />
+          <NavigationProperty Name="Attachments" Relationship="Entities.MessageAttachments" FromRole="Message" ToRole="MessageAttachment" />
+          <Property Name="IsRead" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="RepliesTo" Relationship="Entities.MessageMessage" FromRole="Message" ToRole="Message1" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          </EntityType>
+        <Association Name="SentMessages">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.Message" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="FromId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Inbox">
+          <End Type="Entities.User" Role="User" Multiplicity="1" />
+          <End Type="Entities.Message" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="ToId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Procedure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Users" Relationship="Entities.ProcedureUserProcedure" FromRole="Procedure" ToRole="UserProcedure" />
+          <NavigationProperty Name="Category" Relationship="Entities.ProcedureCategoryProcedure" FromRole="Procedure" ToRole="ProcedureCategory" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Type" Relationship="Entities.ProcedureTypeProcedure" FromRole="Procedure" ToRole="ProcedureType" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="RegularPrice" Type="Double" Nullable="true" />
+          <Property Name="SalePrice" Type="Double" Nullable="true" />
+          <Property Name="PicPath" Type="String" Nullable="true" />
+        </EntityType>
+        <EntityType Name="UserProcedure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Patient" Relationship="Entities.PatientUserProcedure" FromRole="UserProcedure" ToRole="Patient" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Procedure" Relationship="Entities.ProcedureUserProcedure" FromRole="UserProcedure" ToRole="Procedure" />
+          <Property Name="ProcedureId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Appointments" Relationship="Entities.UserProcedureAppointment" FromRole="UserProcedure" ToRole="Appointment" />
+          <NavigationProperty Name="Doctors" Relationship="Entities.DoctorUserProcedure" FromRole="UserProcedure" ToRole="Doctor" />
+          <NavigationProperty Name="Agents" Relationship="Entities.AgentUserProcedure" FromRole="UserProcedure" ToRole="Agent" />
+          <NavigationProperty Name="SharedDocuments" Relationship="Entities.UserProcedureSharedDocument" FromRole="UserProcedure" ToRole="SharedDocument" />
+          <NavigationProperty Name="UserProcedurePatientDocuments" Relationship="Entities.UserProcedureUserProcedurePatientDocument" FromRole="UserProcedure" ToRole="UserProcedurePatientDocument" />
+          <NavigationProperty Name="UserProcedureConsentSigns" Relationship="Entities.UserProcedureUserProcedureConsentSign" FromRole="UserProcedure" ToRole="UserProcedureConsentSign" />
+          <NavigationProperty Name="Place" Relationship="Entities.UserProcedurePlace" FromRole="UserProcedure" ToRole="Place" />
+          <Property Name="PlaceId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PatientUserProcedure">
+          <End Type="Entities.Patient" Role="Patient" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Entities.UserProcedure" Role="UserProcedure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProcedure">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProcedureUserProcedure">
+          <End Type="Entities.Procedure" Role="Procedure" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Entities.UserProcedure" Role="UserProcedure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProcedure">
+              <PropertyRef Name="ProcedureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="ProcedureState">
+          <Member Name="New" />
+          <Member Name="Approved" />
+          <Member Name="Cancelled" />
+        </EnumType>
+        <EntityType Name="Document" Abstract="true">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Path" Type="String" Nullable="false" />
+          <Property Name="Censured" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Entities.DocumentCategoryDocument" FromRole="Document" ToRole="DocumentCategory" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Subcategory" Relationship="Entities.DocumentSubcategoryDocument" FromRole="Document" ToRole="DocumentSubcategory" />
+          <Property Name="SubcategoryId" Type="Int32" Nullable="true" />
+          <Property Name="ContentType" Type="Entities.ContentType" Nullable="true" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <Property Name="RealName" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MessageAttachment" BaseType="Entities.Document" >
+          <NavigationProperty Name="Message" Relationship="Entities.MessageAttachments" FromRole="MessageAttachment" ToRole="Message" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="MessageAttachments">
+          <End Type="Entities.Message" Role="Message" Multiplicity="1" />
+          <End Type="Entities.MessageAttachment" Role="MessageAttachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageAttachment">
+              <PropertyRef Name="MessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PatientDocument" BaseType="Entities.Document" >
+          <NavigationProperty Name="Patient" Relationship="Entities.PatientDocuments" FromRole="PatientDocument" ToRole="Patient" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PatientDocuments">
+          <End Type="Entities.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="Entities.PatientDocument" Role="PatientDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientDocument">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SharedDocument" BaseType="Entities.Document" >
+          <NavigationProperty Name="UserProcedures" Relationship="Entities.UserProcedureSharedDocument" FromRole="SharedDocument" ToRole="UserProcedure" />
+        </EntityType>
+        <EntityType Name="Appointment" >
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <NavigationProperty Name="Procedure" Relationship="Entities.UserProcedureAppointment" FromRole="Appointment" ToRole="UserProcedure" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
+          <Property Name="UserProcedureId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Status" Type="Entities.AppointmentStatus" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
+          <NavigationProperty Name="Place" Relationship="Entities.AppointmentPlace" FromRole="Appointment" ToRole="Place" />
+          <Property Name="PlaceId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserProcedureAppointment">
+          <End Type="Entities.UserProcedure" Role="UserProcedure" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Entities.Appointment" Role="Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProcedure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="UserProcedureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="AppointmentStatus">
+          <Member Name="Scheduled" Value="1" />
+          <Member Name="Canceled" Value="2" />
+          <Member Name="Confirmed" Value="3" />
+          <Member Name="CheckedIn" Value="4" />
+          <Member Name="Ready" Value="5" />
+          <Member Name="InProgress" Value="6" />
+          <Member Name="Complete" Value="7" />
+          <Member Name="Hidden" Value="8" />
+        </EnumType>
+        <EnumType Name="Sex">
+          <Member Name="Other" />
+          <Member Name="Male" />
+          <Member Name="Female" />
+        </EnumType>
+        <ComplexType Name="PersonDetails" >
+          <Property Type="String" Name="FirstName" Nullable="false" />
+          <Property Type="String" Name="LastName" Nullable="false" />
+          <Property Type="String" Name="MiddleName" Nullable="true" />
+          <Property Type="Entities.Sex" Name="Sex" Nullable="false" />
+          <Property Type="DateTime" Name="DOB" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Phone" >
+          <Property Type="String" Name="Home" Nullable="true" />
+          <Property Type="String" Name="Work" Nullable="true" />
+          <Property Type="String" Name="Mobile" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Social" >
+          <Property Type="String" Name="Facebook" Nullable="true" />
+          <Property Type="String" Name="Twitter" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="ProcedureCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Procedures" Relationship="Entities.ProcedureCategoryProcedure" FromRole="ProcedureCategory" ToRole="Procedure" />
+          <Property Name="Name" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="ProcedureCategoryProcedure">
+          <End Type="Entities.ProcedureCategory" Role="ProcedureCategory" Multiplicity="1" />
+          <End Type="Entities.Procedure" Role="Procedure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcedureCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Procedure">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DocumentCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Subcategories" Relationship="Entities.DocumentCategoryDocumentSubcategory" FromRole="DocumentCategory" ToRole="DocumentSubcategory" />
+          <NavigationProperty Name="Documents" Relationship="Entities.DocumentCategoryDocument" FromRole="DocumentCategory" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="DocumentSubcategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Category" Relationship="Entities.DocumentCategoryDocumentSubcategory" FromRole="DocumentSubcategory" ToRole="DocumentCategory" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Documents" Relationship="Entities.DocumentSubcategoryDocument" FromRole="DocumentSubcategory" ToRole="Document" />
+          <Property Name="Name" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="DocumentCategoryDocumentSubcategory">
+          <End Type="Entities.DocumentCategory" Role="DocumentCategory" Multiplicity="1" />
+          <End Type="Entities.DocumentSubcategory" Role="DocumentSubcategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentSubcategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentCategoryDocument">
+          <End Type="Entities.DocumentCategory" Role="DocumentCategory" Multiplicity="1" />
+          <End Type="Entities.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DocumentSubcategoryDocument">
+          <End Type="Entities.DocumentSubcategory" Role="DocumentSubcategory" Multiplicity="0..1" />
+          <End Type="Entities.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentSubcategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="SubcategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="ContentType">
+          <Member Name="Photo" />
+          <Member Name="Word" />
+          <Member Name="Pdf" />
+          <Member Name="Video" />
+        </EnumType>
+        <EnumType Name="Currency">
+          <Member Name="USD" />
+        </EnumType>
+        <EntityType Name="ProcedureType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Procedures" Relationship="Entities.ProcedureTypeProcedure" FromRole="ProcedureType" ToRole="Procedure" />
+        </EntityType>
+        <Association Name="ProcedureTypeProcedure">
+          <End Type="Entities.ProcedureType" Role="ProcedureType" Multiplicity="1" />
+          <End Type="Entities.Procedure" Role="Procedure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcedureType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Procedure">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Contact" >
+          <Property Type="Entities.Phone" Name="Phone" Nullable="false" />
+          <Property Type="Entities.Social" Name="Social" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="false" />
+          <Property Type="String" Name="Address1" Nullable="true" />
+          <Property Type="String" Name="ZipCode" Nullable="true" />
+        </ComplexType>
+        <Association Name="AgentPatient">
+          <End Type="Entities.Agent" Role="Agent" Multiplicity="1" />
+          <End Type="Entities.Patient" Role="Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonDetails" Type="Entities.PersonDetails" Nullable="false" />
+          <Property Name="ProcedureId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserProcedures" Relationship="Entities.DoctorUserProcedure" FromRole="Doctor" ToRole="UserProcedure" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="true" />
+          <Property Name="PicPath" Type="String" Nullable="true" />
+        </EntityType>
+        <Association Name="DoctorUserProcedure">
+          <End Type="Entities.Doctor" Role="Doctor" Multiplicity="*" >
+          </End>
+          <End Type="Entities.UserProcedure" Role="UserProcedure" Multiplicity="*" >
+          </End>
+        </Association>
+        <EntityType Name="SystemConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" />
+        </EntityType>
+        <EnumType Name="AgentType" >
+          <Member Name="SurgicalCoordinator" />
+          <Member Name="FinanceCoordinator" />
+          <Member Name="MedicalAssistant" />
+          <Member Name="HomeAwayAssistant" />
+        </EnumType>
+        <Association Name="AgentUserProcedure">
+          <End Type="Entities.Agent" Role="Agent" Multiplicity="*" />
+          <End Type="Entities.UserProcedure" Role="UserProcedure" Multiplicity="*" />
+        </Association>
+        <Association Name="UserProcedureSharedDocument">
+          <End Type="Entities.UserProcedure" Multiplicity="*" Role="UserProcedure" />
+          <End Type="Entities.SharedDocument" Multiplicity="*" Role="SharedDocument" />
+        </Association>
+        <EntityType Name="UserProcedurePatientDocument" BaseType="Entities.Document">
+          <NavigationProperty Name="UserProcedure" Relationship="Entities.UserProcedureUserProcedurePatientDocument" FromRole="UserProcedurePatientDocument" ToRole="UserProcedure" />
+          <Property Name="UserProcedureId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Entities.PatientUserProcedurePatientDocument" FromRole="UserProcedurePatientDocument" ToRole="Patient" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserProcedureUserProcedurePatientDocument">
+          <End Type="Entities.UserProcedure" Role="UserProcedure" Multiplicity="1" />
+          <End Type="Entities.UserProcedurePatientDocument" Role="UserProcedurePatientDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProcedure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProcedurePatientDocument">
+              <PropertyRef Name="UserProcedureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PatientUserProcedurePatientDocument">
+          <End Type="Entities.Patient" Role="Patient" Multiplicity="1" />
+          <End Type="Entities.UserProcedurePatientDocument" Role="UserProcedurePatientDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProcedurePatientDocument">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ConsentForm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="FilePath" Type="String" Nullable="true" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <NavigationProperty Name="UserProcedureConsentSigns" Relationship="Entities.ConsentFormUserProcedureConsentSign" FromRole="ConsentForm" ToRole="UserProcedureConsentSign" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Trigger" Type="Entities.ReportTrigger" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Entities.AdminReport" FromRole="Report" ToRole="Admin" />
+          <Property Name="AdminId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EnumType Name="ReportTrigger">
+          <Member Name="MailSent" />
+          <Member Name="MailReceived" />
+          <Member Name="UploadedFile" />
+        </EnumType>
+        <Association Name="AdminReport">
+          <End Type="Entities.Admin" Role="Admin" Multiplicity="1" />
+          <End Type="Entities.Report" Role="Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserProcedureConsentSign">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="UserProcedure" Relationship="Entities.UserProcedureUserProcedureConsentSign" FromRole="UserProcedureConsentSign" ToRole="UserProcedure" />
+          <Property Name="UserProcedureId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ConsentForm" Relationship="Entities.ConsentFormUserProcedureConsentSign" FromRole="UserProcedureConsentSign" ToRole="ConsentForm" />
+          <Property Name="ConsentFormId" Type="Int32" Nullable="false" />
+          <Property Name="Signed" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="UserProcedureUserProcedureConsentSign">
+          <End Type="Entities.UserProcedure" Role="UserProcedure" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Entities.UserProcedureConsentSign" Role="UserProcedureConsentSign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProcedure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProcedureConsentSign">
+              <PropertyRef Name="UserProcedureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ConsentFormUserProcedureConsentSign">
+          <End Type="Entities.ConsentForm" Role="ConsentForm" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Entities.UserProcedureConsentSign" Role="UserProcedureConsentSign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsentForm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProcedureConsentSign">
+              <PropertyRef Name="ConsentFormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MessageMessage">
+          <End Type="Entities.Message" Role="Message" Multiplicity="0..1" />
+          <End Type="Entities.Message" Role="Message1" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="UserProcedures" Relationship="Entities.UserProcedurePlace" FromRole="Place" ToRole="UserProcedure" />
+          <NavigationProperty Name="Appointments" Relationship="Entities.AppointmentPlace" FromRole="Place" ToRole="Appointment" />
+        </EntityType>
+        <Association Name="UserProcedurePlace">
+          <End Type="Entities.UserProcedure" Role="UserProcedure" Multiplicity="*" />
+          <End Type="Entities.Place" Role="Place" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProcedure">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppointmentPlace">
+          <End Type="Entities.Appointment" Role="Appointment" Multiplicity="*" />
+          <End Type="Entities.Place" Role="Place" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EntitiesStoreContainer" CdmEntityContainer="ModelContainer">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Patient)">
+        <MappingFragment StoreEntitySet="Users_Patient">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ComplexProperty Name="Profile" TypeName="Entities.PersonDetails">
+            <ScalarProperty Name="FirstName" ColumnName="Profile_FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="Profile_LastName" />
+            <ScalarProperty Name="MiddleName" ColumnName="Profile_MiddleName" />
+            <ScalarProperty Name="Sex" ColumnName="Profile_Sex" />
+            <ScalarProperty Name="DOB" ColumnName="Profile_DOB" />
+          </ComplexProperty>
+          <ComplexProperty Name="Contact" TypeName="Entities.Contact">
+            <ComplexProperty Name="Phone" TypeName="Entities.Phone">
+              <ScalarProperty Name="Home" ColumnName="Contact_Phone_Home" />
+              <ScalarProperty Name="Work" ColumnName="Contact_Phone_Work" />
+              <ScalarProperty Name="Mobile" ColumnName="Contact_Phone_Mobile" />
+            </ComplexProperty>
+            <ComplexProperty Name="Social" TypeName="Entities.Social">
+              <ScalarProperty Name="Facebook" ColumnName="Contact_Social_Facebook" />
+              <ScalarProperty Name="Twitter" ColumnName="Contact_Social_Twitter" />
+            </ComplexProperty>
+            <ScalarProperty Name="Address" ColumnName="Contact_Address" />
+            <ScalarProperty Name="Address1" ColumnName="Contact_Address1" />
+            <ScalarProperty Name="ZipCode" ColumnName="Contact_ZipCode" />
+          </ComplexProperty>
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PicPath" ColumnName="PicPath" />
+          <ScalarProperty Name="PatientNumber" ColumnName="PatientNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Agent)">
+        <MappingFragment StoreEntitySet="Users_Agent">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ComplexProperty Name="PersonDetails" TypeName="Entities.PersonDetails">
+            <ScalarProperty Name="FirstName" ColumnName="PersonDetails_FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="PersonDetails_LastName" />
+            <ScalarProperty Name="MiddleName" ColumnName="PersonDetails_MiddleName" />
+            <ScalarProperty Name="Sex" ColumnName="PersonDetails_Sex" />
+            <ScalarProperty Name="DOB" ColumnName="PersonDetails_DOB" />
+          </ComplexProperty>
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PicPath" ColumnName="PicPath" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Admin)">
+        <MappingFragment StoreEntitySet="Users_Admin">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Message)">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="ToId" ColumnName="ToId" />
+          <ScalarProperty Name="FromId" ColumnName="FromId" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Procedures">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Procedure)">
+        <MappingFragment StoreEntitySet="Procedures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="RegularPrice" ColumnName="RegularPrice" />
+          <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+          <ScalarProperty Name="PicPath" ColumnName="PicPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProcedures">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.UserProcedure)">
+        <MappingFragment StoreEntitySet="UserProcedures">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="ProcedureId" ColumnName="ProcedureId" />
+          <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Document)">
+        <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Censured" ColumnName="Censured" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="SubcategoryId" ColumnName="SubcategoryId" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RealName" ColumnName="RealName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.MessageAttachment)">
+        <MappingFragment StoreEntitySet="Documents_MessageAttachment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.PatientDocument)">
+        <MappingFragment StoreEntitySet="Documents_PatientDocument">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.SharedDocument)">
+        <MappingFragment StoreEntitySet="Documents_SharedDocument">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.UserProcedurePatientDocument)">
+        <MappingFragment StoreEntitySet="Documents_UserProcedurePatientDocument">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserProcedureId" ColumnName="UserProcedureId" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Appointments">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Appointment)">
+        <MappingFragment StoreEntitySet="Appointments">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserProcedureId" ColumnName="UserProcedureId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProcedureCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.ProcedureCategory)">
+        <MappingFragment StoreEntitySet="ProcedureCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.DocumentCategory)">
+        <MappingFragment StoreEntitySet="DocumentCategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentSubcategories">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.DocumentSubcategory)">
+        <MappingFragment StoreEntitySet="DocumentSubcategories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProcedureTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.ProcedureType)">
+        <MappingFragment StoreEntitySet="ProcedureTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Doctors">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Doctor)">
+        <MappingFragment StoreEntitySet="Doctors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ComplexProperty Name="PersonDetails" TypeName="Entities.PersonDetails">
+            <ScalarProperty Name="FirstName" ColumnName="PersonDetails_FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="PersonDetails_LastName" />
+            <ScalarProperty Name="MiddleName" ColumnName="PersonDetails_MiddleName" />
+            <ScalarProperty Name="Sex" ColumnName="PersonDetails_Sex" />
+            <ScalarProperty Name="DOB" ColumnName="PersonDetails_DOB" />
+          </ComplexProperty>
+          <ScalarProperty Name="ProcedureId" ColumnName="ProcedureId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PicPath" ColumnName="PicPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemConfigurations">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.SystemConfiguration)">
+        <MappingFragment StoreEntitySet="SystemConfigurations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConsentForms">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.ConsentForm)">
+        <MappingFragment StoreEntitySet="ConsentForms">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reports">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Report)">
+        <MappingFragment StoreEntitySet="Reports">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Trigger" ColumnName="Trigger" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProcedureConsentSign">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.UserProcedureConsentSign)">
+        <MappingFragment StoreEntitySet="UserProcedureConsentSign">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserProcedureId" ColumnName="UserProcedureId" />
+          <ScalarProperty Name="ConsentFormId" ColumnName="ConsentFormId" />
+          <ScalarProperty Name="Signed" ColumnName="Signed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Places">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Place)">
+        <MappingFragment StoreEntitySet="Places">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DoctorUserProcedure" TypeName="Entities.DoctorUserProcedure" StoreEntitySet="DoctorUserProcedure">
+      <EndProperty Name="Doctor">
+        <ScalarProperty Name="Id" ColumnName="Doctors_Id" />
+      </EndProperty>
+      <EndProperty Name="UserProcedure">
+        <ScalarProperty Name="Id" ColumnName="UserProcedures_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="AgentUserProcedure" TypeName="Entities.AgentUserProcedure" StoreEntitySet="AgentUserProcedure">
+      <EndProperty Name="Agent">
+        <ScalarProperty Name="Id" ColumnName="Agents_Id" />
+      </EndProperty>
+      <EndProperty Name="UserProcedure">
+        <ScalarProperty Name="Id" ColumnName="UserProcedures_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="UserProcedureSharedDocument" TypeName="Entities.UserProcedureSharedDocument" StoreEntitySet="UserProcedureSharedDocument">
+      <EndProperty Name="UserProcedure">
+        <ScalarProperty Name="Id" ColumnName="UserProcedures_Id" />
+      </EndProperty>
+      <EndProperty Name="SharedDocument">
+        <ScalarProperty Name="Id" ColumnName="SharedDocuments_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="MessageMessage" TypeName="Entities.MessageMessage" StoreEntitySet="Messages">
+      <EndProperty Name="Message">
+        <ScalarProperty Name="Id" ColumnName="MessageMessage_Message1_Id" />
+      </EndProperty>
+      <EndProperty Name="Message1">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="MessageMessage_Message1_Id" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

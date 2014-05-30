@@ -1,0 +1,81 @@
+﻿@using MyVanity.Services.Membership
+@using MyVanity.Web.MvcHelpers
+@model MyVanity.Model.PatientProcedureModels.Impl.PatientProcedureIndexModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (User.IsInRole(ApplicationRole.SurgicalCoordinator.ToString()))
+{
+    <p>
+        <a href="@Url.Action("Create")" class="btn btn-default">
+            <span class="glyphicon glyphicon-calendar"></span> Schedule
+        </a>
+    </p>
+}
+
+    @if (Model.Items.Any())
+    {
+         <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.SortColumn(Model, "Patient.Profile.FirstName", "Patient", "PatientProcedure", "Index")
+                </th>
+                <th>
+                    @Html.SortColumn(Model,"Procedure.Name", "Procedure", "PatientProcedure", "Index")
+                </th>
+                <th>
+                    @Html.Raw("Doctors")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Procedure.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FormattedAddedDoctors)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+        @Html.Pager(Model, "PatientProcedure", "Index")
+    }
+
+@section scripts {
+        <script type="text/javascript">
+            $(function() {
+                $("#user-procedure-nav-item").addClass("active");
+
+                $("#pager").pager({
+                    pageSelector: "#pageSelector",
+                    buttonSelector: "ul.pagination li",
+                    currentPage: @Model.Page,
+                    pageSize: @Model.PageSize 
+                });
+            });
+        </script>
+    }
+
+
+
+
+
+
+
+
+
+

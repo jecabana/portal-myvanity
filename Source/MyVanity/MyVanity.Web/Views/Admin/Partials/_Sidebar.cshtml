@@ -1,0 +1,48 @@
+﻿<ul class="nav nav-sidebar">
+    @Html.Partial("_SharedSidebarElements")
+
+    <li id="agent-nav-item">
+        @Html.ActionLink("Agents", "Index", "Agent")
+    </li>
+    <li id="doctor-nav-item">
+        @Html.ActionLink("Doctors", "DoctorsList", "Admin")
+    </li>
+    <li id="procedures-management-nav-item" class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Procedures <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li id="procedures-nav-item">@Html.ActionLink("Procedures", "Index", "Procedure")</li>
+            <li class="divider"></li>
+            <li id="procedure-category-nav-item">@Html.ActionLink("Procedure Categories", "Index", "ProcedureCategory")</li>
+            <li class="divider"></li>
+            <li id="procedure-types-nav-item">@Html.ActionLink("Procedure Types", "Index", "ProcedureType")</li>
+        </ul>
+    </li>
+    <li id="resources-management-nav-item" class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li id="shared-resources">
+                @Html.ActionLink("Shared Resources", "Index", "Resources")
+            </li>
+            <li class="divider"></li>
+            <li id="patient-documents">
+                @Html.ActionLink("Uploaded By Patients", "UploadedByPatients", "Resources")
+            </li>
+        </ul>
+    </li>
+    <li id="reports-nav-item">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li id="consent-reports">
+                @Html.ActionLink("Unsigned Consents", "ConsentReports", "Admin")
+            </li>
+            <li class="divider"></li>
+            <li id="appointment-reports">
+                @Html.ActionLink("Unconfirmed Appointments", "AppointmentReports", "Admin")
+            </li>
+            @*<li id="messages-reports">@Html.ActionLink("Unanswered Emails", "UnansweredEmails", "Admin")</li>
+            <li id="">@Html.ActionLink("Conversations", "Conversations")</li>*@
+        </ul>
+        
+    </li>
+</ul>
+

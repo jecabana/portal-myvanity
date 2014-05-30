@@ -1,0 +1,102 @@
+﻿@using MyVanity.Web.MvcHelpers
+@model MyVanity.Model.AgentModels.Impl.AgentIndexModel
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-default">
+        <span class="glyphicon glyphicon-user"></span> New Agent
+    </a>
+</p>
+
+
+@if (Model.Items.Any())
+{
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.SortColumn(Model, "ProfileDetails.FirstName", "First Name", "Agent", "Index")
+            </th>
+            <th>
+                @Html.SortColumn(Model, "ProfileDetails.LastName", "Last Name", "Agent", "Index")
+            </th>
+            <th>
+                @Html.SortColumn(Model, "ProfileDetails.MiddleName", "Middle Name", "Agent", "Index")
+            </th>
+            <th>
+                @Html.Raw("Date Of Birth")
+            </th>
+            <th>
+                @Html.Raw("Type")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProfileDetails.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProfileDetails.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProfileDetails.MiddleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProfileDetails.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Type)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    <button class="btn btn-danger btn-sm delete-btn" data-agent-id="@item.Id" data-user-name="@item.UserName">Delete</button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Pager(Model, "Agent", "Index")
+
+}
+
+@section scripts {
+    <script type="text/javascript">
+        $(function() {
+            $("#agent-nav-item").addClass("active");
+
+            $("#pager").pager({
+                pageSelector: "#pageSelector",
+                currentPage: @Model.Page,
+                pageSize: @Model.PageSize,
+                buttonSelector: "ul.pagination li"
+                });
+
+            var $deleteBtns = $(".delete-btn");
+
+            $deleteBtns.click(function() {
+                var userName = $(this).attr("data-user-name");
+                var id = $(this).attr("data-agent-id");
+
+                $.ajax({
+                    url: "/Agent/Delete",
+                    method: "POST",
+                    data: {
+                        agentId: id,
+                        userName: userName
+                    },
+                    success: function(result) {
+                        if (result.success) {
+                            window.location.reload(true);
+                        } else {
+                            myvanity.alertError(result.message, 5000);
+                        }
+                    }
+                });
+
+            });
+        });
+    </script>
+}

@@ -1,0 +1,108 @@
+﻿@using MyVanity.Services.Membership
+@using MyVanity.Web.MvcHelpers
+@model MyVanity.Model.PatientModels.Impl.PatientIndexModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (User.IsInRole(ApplicationRole.SurgicalCoordinator.ToString()))
+{
+    <p>
+        <a href="@Url.Action("Create")" class="btn btn-default">
+            <span class="glyphicon glyphicon-heart"></span> New Patient
+        </a>
+    </p>
+}
+
+@if (Model.Items.Any())
+{
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.SortColumn(Model, "Profile.FirstName", "First Name", "Patient", "Index")
+            </th>
+            <th>
+                @Html.SortColumn(Model, "Profile.LastName", "Last Name", "Patient", "Index")
+            </th>
+            <th>
+                @Html.SortColumn(Model, "Profile.MiddleName", "Middle Name", "Patient", "Index")
+            </th>
+            <th>
+                @Html.Raw("Date Of Birth")
+            </th>
+            <th>
+                @Html.SortColumn(Model, "UserName", "Username", "Patient", "Index")
+            </th>
+
+            @if (User.IsInRole(ApplicationRole.Admin.ToString()))
+            {
+                <th>
+                    @Html.SortColumn(Model, "Agent.PersonDetails.FirstName", "Agent", "Patient", "Index")
+                </th>
+            }
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.MiddleName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profile.DOB)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                @if (User.IsInRole(ApplicationRole.Admin.ToString()))
+                {
+                    <td>
+                        @Html.DisplayFor(model => item.AgentName)
+                    </td>
+                }
+                <td>
+                    @if (User.IsInRole(ApplicationRole.SurgicalCoordinator.ToString()))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    }
+                    @*@Html.ActionLink("Delete", "Delete", new { userName = item.UserName }, new { @class = "btn btn-danger btn-sm" })*@
+                    <a href="#" data-agent-id="@item.AgentId" data-patient-id="@item.Id" class="btn btn-warning btn-sm assign-btn">Reassign to Agent</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Pager(Model, "Patient", "Index")   
+}
+
+@section scripts {
+    @Scripts.Render("~/Content/system-js/patient-index-module.js")
+
+    <script type="text/javascript">
+        $(function() {
+            $("#patient-nav-item").addClass("active");
+
+            $("#pager").pager({
+                pageSelector: "#pageSelector",
+                buttonSelector: "ul.pagination li",
+                currentPage: @Model.Page,
+                pageSize: @Model.PageSize 
+            });
+
+            var indexModule = new PatientIndexModule({
+                assignBtn: ".assign-btn"
+            });
+            indexModule.Init();
+        });
+    </script>
+}

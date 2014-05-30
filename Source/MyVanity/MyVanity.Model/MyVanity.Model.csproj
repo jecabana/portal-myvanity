@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7248E3D7-0375-4DA2-B949-C0E0CC5CF452}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyVanity.Model</RootNamespace>
+    <AssemblyName>MyVanity.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountModels\AccountViewModels.cs" />
+    <Compile Include="AdminModels\AdminViewModel.cs" />
+    <Compile Include="AgentModels\IAgentModelConverter.cs" />
+    <Compile Include="AgentModels\Impl\AgentIndexModel.cs" />
+    <Compile Include="AgentModels\Impl\AgentModelConverter.cs" />
+    <Compile Include="AgentModels\Impl\AgentEditModel.cs" />
+    <Compile Include="AppointmentModels\Impl\AppointmentEditModel.cs" />
+    <Compile Include="AppointmentModels\Impl\AppointmentReportViewModel.cs" />
+    <Compile Include="AppointmentModels\Impl\AppointmentsIndexModel.cs" />
+    <Compile Include="AppointmentModels\Impl\AppointmentsModelConverter.cs" />
+    <Compile Include="ConsentFormModels\Impl\ConsentFormEditModel.cs" />
+    <Compile Include="ConsentFormModels\Impl\ConsentFormIndexModel.cs" />
+    <Compile Include="ConsentFormModels\Impl\ConsentFormModelConverter.cs" />
+    <Compile Include="ConsentFormModels\Impl\ConsentReportViewModel.cs" />
+    <Compile Include="ConsentFormModels\Impl\ProcedureConsentModelConverter.cs" />
+    <Compile Include="ConsentFormModels\Impl\ProcedureConsentViewModel.cs" />
+    <Compile Include="DoctorModels\IDoctorViewModelConverter.cs" />
+    <Compile Include="DoctorModels\Impl\DoctorEditModel.cs" />
+    <Compile Include="DoctorModels\Impl\DoctorModelConverter.cs" />
+    <Compile Include="DocumentCategoryModels\CategoryEditModelConverter.cs" />
+    <Compile Include="DocumentCategoryModels\Impl\CategoryEditModel.cs" />
+    <Compile Include="FileModels\Impl\FileModelConverter.cs" />
+    <Compile Include="FileModels\Impl\FileSyncModelConverter.cs" />
+    <Compile Include="FileModels\Impl\FileEditModel.cs" />
+    <Compile Include="FileModels\Impl\FileEditModelSync.cs" />
+    <Compile Include="IModelConverter.cs" />
+    <Compile Include="LoggedUserViewModel.cs" />
+    <Compile Include="Pager\IPagedViewModel.cs" />
+    <Compile Include="MessageModels\ConversationViewModel.cs" />
+    <Compile Include="MessageModels\MessageEditModel.cs" />
+    <Compile Include="MessageModels\MessageIndexModel.cs" />
+    <Compile Include="MessageModels\MessageModelConverter.cs" />
+    <Compile Include="MessageModels\MessageReportViewModel.cs" />
+    <Compile Include="ModelBase.cs" />
+    <Compile Include="ModelConverterHelper.cs" />
+    <Compile Include="Pager\PagedViewModel.cs" />
+    <Compile Include="PatientDashboard\Impl\PatientDashboardModelConverter.cs" />
+    <Compile Include="PatientDashboard\Impl\PatientDashboardViewModel.cs" />
+    <Compile Include="PatientDashboard\IPatientDashboardModelConverter.cs" />
+    <Compile Include="PatientProcedureModels\Impl\PatientProcedureEditModel.cs" />
+    <Compile Include="PatientProcedureModels\Impl\PatientProcedureIndexModel.cs" />
+    <Compile Include="PatientProcedureModels\Impl\PatientProcedureModelConverter.cs" />
+    <Compile Include="PatientProcedureModels\IPatientProcedureModelConverter.cs" />
+    <Compile Include="PatientModels\Impl\PatientEditModel.cs" />
+    <Compile Include="PatientModels\Impl\PatientIndexModel.cs" />
+    <Compile Include="PatientModels\Impl\PatientModelConverter.cs" />
+    <Compile Include="PatientModels\IPatientModelConverter.cs" />
+    <Compile Include="AppointmentModels\IAppointmentModelConverter.cs" />
+    <Compile Include="PlaceModels\PlaceEditModel.cs" />
+    <Compile Include="PlaceModels\PlaceModelConverter.cs" />
+    <Compile Include="ProcedureCategoryModels\Impl\ProcedureCategoryModelConverter.cs" />
+    <Compile Include="ProcedureCategoryModels\IProcedureCategoryModelConverter.cs" />
+    <Compile Include="ProcedureCategoryModels\Impl\ProcedureCategoryViewModel.cs" />
+    <Compile Include="ProcedureTypeModels\Impl\ProcedureTypeEditModel.cs" />
+    <Compile Include="ProcedureTypeModels\Impl\ProcedureTypeIndexModel.cs" />
+    <Compile Include="ProcedureTypeModels\Impl\ProcedureTypeModelConverter.cs" />
+    <Compile Include="ProcedureModels\Impl\ProcedureEditModel.cs" />
+    <Compile Include="ProcedureModels\Impl\ProcedureIndexModel.cs" />
+    <Compile Include="ProcedureModels\Impl\ProcedureModelConverter.cs" />
+    <Compile Include="ProcedureModels\IProcedureModelConverter.cs" />
+    <Compile Include="ProfileModels\Contact\IContactModelConverter.cs" />
+    <Compile Include="ProfileModels\Contact\Impl\ContactModel.cs" />
+    <Compile Include="ProfileModels\Contact\Impl\ContactModelConverter.cs" />
+    <Compile Include="ProfileModels\Profile\Impl\ProfileModelConverter.cs" />
+    <Compile Include="ProfileModels\Profile\IProfileModelConverter.cs" />
+    <Compile Include="ProfileModels\Profile\Impl\ProfileModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceModels\ResourcesIndexModel.cs" />
+    <Compile Include="ResourceModels\UserProcedureDocModelConverter.cs" />
+    <Compile Include="ResourceModels\UserProcedurePatientDocViewModel.cs" />
+    <Compile Include="Results\BaseResult.cs" />
+    <Compile Include="Results\PagedResult.cs" />
+    <Compile Include="SharedDocumentModels\FileModelSyncBuilder.cs" />
+    <Compile Include="SharedDocumentModels\FileModelBuilder.cs" />
+    <Compile Include="SharedDocumentModels\ISharedDocsModelBuilder.cs" />
+    <Compile Include="UserModels\IUserModelConverter.cs" />
+    <Compile Include="UserModels\UserViewModel.cs" />
+    <Compile Include="UserModels\UserViewModelConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyVanity.Common\MyVanity.Common.csproj">
+      <Project>{D91D1192-306B-49F3-912F-32888BD2CC01}</Project>
+      <Name>MyVanity.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyVanity.Domain\MyVanity.Domain.csproj">
+      <Project>{8B911593-3C8A-4650-875D-A609049B6BB9}</Project>
+      <Name>MyVanity.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,153 @@
+﻿@using MyVanity.Web.Helpers.MvcHelpers
+@model MyVanity.Model.PatientProcedureModels.Impl.PatientProcedureEditModel
+
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.PatientId, new { id = "patient-id" })
+
+    <div class="form-group">
+        @Html.RequiredLabelFor(model => model.PatientName, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.PatientName, new { id = "patient-name" })
+            <a href="#" id="search-patients" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="right" title="You may search by the Patient's First Name, Middle Name, Last Name, his Number or Email">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </a>
+            @Html.ValidationMessageFor(model => model.PatientId, "Please, select a patient for scheduling the procedure")
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.RequiredLabelFor(model => model.SelectedProcedure, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.GDropDownListFor(model => model.SelectedProcedure, Model.Procedures, "Name", "Id", null, true, true)
+            @Html.ValidationMessageFor(model => model.SelectedProcedure)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.RequiredLabelFor(model => model.SelectedPlace, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.GDropDownListFor(model => model.SelectedPlace, Model.Places, "Name", "Id",null, true, true)
+            @Html.ValidationMessageFor(model => model.SelectedPlace)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.RequiredLabelFor(model => model.SelectedFinancialCoordinator, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.GDropDownListFor(model => model.SelectedFinancialCoordinator, Model.FinancialCoordinators, "FullName", "Id", null, true, true)
+            @Html.ValidationMessageFor(model => model.SelectedFinancialCoordinator)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.RequiredLabelFor(model => model.SelectedMedicalAssistant, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.GDropDownListFor(model => model.SelectedMedicalAssistant, Model.MedicalAssistants, "FullName", "Id", null, true, true)
+            @Html.ValidationMessageFor(model => model.SelectedMedicalAssistant)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.SelectedHomeAwayAssistant, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.GDropDownListFor(model => model.SelectedHomeAwayAssistant, Model.HomeAwayAssistants, "FullName", "Id", null, true)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.RequiredLabelFor(model => model.SelectedDoctor, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.GDropDownListFor(model => model.SelectedDoctor, Model.Doctors, "FullName", "Id", new { id = "doctor-select" }, true, true)
+            <a href="#" class="btn btn-default btn-xs" data-bind="click: addDoctor">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;Add Doctor
+            </a>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.SelectedDoctors, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <ul data-bind="foreach: addedDoctors" class="doctorsTable">
+                <li>
+                    <span data-bind="text: name"></span>
+                    <input type="hidden" data-bind="attr: { name: 'SelectedDoctors[' + $index() + ']', value: id }"/>
+                    <a href="#" data-bind="click:$parent.removeDoctor.bind($data)" class="removeButton">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </li>
+            </ul>
+            @Html.ValidationMessageFor(model => model.SelectedDoctors)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.SelectedConsent, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.GDropDownListFor(model => model.SelectedDoctor, Model.Consents, "Title", "Id", new { id = "consent-select" }, true, true)
+            <a href="#" class="btn btn-default btn-xs" data-bind="click: addNewConsent">
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;Add Consent
+            </a>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.SelectedConsents, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <ul data-bind="foreach: addedConsents" class="doctorsTable">
+                <li data-bind="attr: {'class': signed == 'true' || signed == 'True' ? 'success' : 'warning'}">
+                    <span data-bind="text: title"></span>
+                    <input type="hidden" data-bind="attr: { name: 'SelectedConsents[' + $index() + '].Id', value: id }" />
+                    <input type="hidden" data-bind="attr: { name: 'SelectedConsents[' + $index() + '].ConsentId', value: consentId }" />
+                    <input type="hidden" data-bind="attr: { name: 'SelectedConsents[' + $index() + '].Signed', value: signed }"/>
+                    <a href="#" data-bind="click:$parent.removeConsent.bind($data)" class="removeButton">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </li>
+            </ul>
+            @Html.ValidationMessageFor(model => model.SelectedConsents)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.SelectedFiles, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="file-search-name" />
+            <a href="#" class="btn btn-default btn-xs" id="file-search-id" data-toggle="tooltip" data-placement="right" title="You may search by the File's Name, Category Name or Subcategory Name">
+                <span class="glyphicon glyphicon-search"></span>&nbsp;Search Files
+            </a>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Added Files</label>
+        <div class="col-md-10">
+            <ul data-bind="foreach: addedFiles" class="doctorsTable">
+                <li>
+                    <a data-bind="attr: {href: '/FileManaging/DownloadFile?path=' + path }">
+                        <span data-bind="text: name"></span>
+                    </a>
+                    <input type="hidden" data-bind="attr: { name: 'SelectedFiles[' + $index() + ']', value: id }" />
+                    <a href="#" data-bind="click:$parent.removeFile.bind($data)" class="removeButton">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </li>
+            </ul>
+            @Html.ValidationMessageFor(model => model.SelectedFiles)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

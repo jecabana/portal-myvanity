@@ -1,0 +1,15 @@
+﻿@model MyVanity.Model.ProcedureCategoryModels.Impl.ProcedureCategoryViewModel
+
+@{
+    ViewBag.Title = "Create Procedure Category";
+}
+
+<h4>@ViewBag.Title</h4>
+<hr/>
+
+@using (Html.BeginForm("Create")) 
+{
+    @Html.EditorFor(model => model, "ProcedureCategoryEditModel")       
+}
+
+

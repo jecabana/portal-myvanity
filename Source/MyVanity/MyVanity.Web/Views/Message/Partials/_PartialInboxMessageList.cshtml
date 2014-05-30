@@ -1,0 +1,64 @@
+﻿@using MyVanity.Model.Pager
+@using MyVanity.Web.MvcHelpers
+@model PagedViewModel<MyVanity.Model.MessageModels.MessageEditModel>
+
+<div class="panel panel-default inbox-messages">
+    <div class="panel-heading">
+        <span class="panel-title">
+            @{
+                var messages = Model.Items;
+            }
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapse-inbox" class="collapsed">
+                <span class="pink">(@Model.TotalRecords)</span>&nbsp;INBOX
+            </a>
+        </span>
+    </div>
+    <div id="collapse-inbox" class="panel-collapse collapse" style="height: 0px;">
+        <div class="panel-body">
+            @{
+                if (messages != null && messages.Any())
+                {
+                    <div class="panel panel-default inbox-messages">
+                        @foreach (var message in messages)
+                        {
+                            <div class="panel-heading" style="padding-left: 0px;">
+                                <button class="btn btn-info btn-xs reply-btn" data-message-id="@message.Id" data-reply-to="@message.FromUserId" style="float:right">Reply</button>
+                                <span class="panel-title">
+                                    <span class="pink">From:</span> @message.FromUserName 
+                                    @if (!message.IsRead)
+                                    {
+                                        <span class="label label-success" style="padding: .1em .5em .1em;">New</span>
+                                    }
+                                    <br />
+                                </span>
+                                <a data-toggle="collapse" class="inbox-message-collapse-btn" data-message-id="@message.Id" href="#collapse-@message.Id">
+                                    <span class="pink">Subject:</span> @message.Subject<br />
+                                </a>
+                            </div>
+                            <div id="collapse-@message.Id" data-toggle="collapse" class="panel-collapse collapse">
+                                <p>
+                                    @message.Body
+                                </p>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <span>You have no messages in the inbox</span>
+                }
+            }
+
+            @Html.SmallPager(Model, "Message", "PartialInbox")
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#pager").pager({
+        pageSelector: "#pageSelector",
+        currentPage: @Model.Page,
+        pageSize: @Model.PageSize,
+        buttonSelector: "ul.pagination li"
+    });
+</script>

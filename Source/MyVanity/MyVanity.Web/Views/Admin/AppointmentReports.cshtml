@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MyVanity.Model.AppointmentModels.Impl.AppointmentReportViewModel>
+
+@if (!Model.Any())
+{
+    <h4>There are not any reports</h4>
+}
+else
+{
+    <h4>Unconfirmed appointments 5 days before Appointment Day</h4>
+    <hr />
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Patient)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AppointmentDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AppointmentDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AppointmentDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MissingDays)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                var cls = string.Empty;
+                if (item.Warning)
+                {
+                    cls = "class=warning";
+                }
+                else if(item.Danger)
+                {
+                    cls = "class=danger";
+                }
+                <tr @cls>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Patient)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AppointmentDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AppointmentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AppointmentDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MissingDays)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+}
+
+
+@section scripts {
+    <script>
+        $("#reports-nav-item").addClass("active");
+        $("#appointment-reports").addClass("active");
+    </script>    
+}

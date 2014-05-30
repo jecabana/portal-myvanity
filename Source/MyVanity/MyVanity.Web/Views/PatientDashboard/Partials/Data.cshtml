@@ -1,0 +1,55 @@
+﻿@using MyVanity.Web.Helpers.MvcHelpers
+@model MyVanity.Model.PatientDashboard.Impl.PatientDashboardViewModel
+
+<div class="data-template">
+    <ul class="content-list-1 list-unstyled">
+        <li>
+            <div class="box1">
+                <h3>PATIENT</h3>
+                <dl class="dl-horizontal">
+                    <dt>Patient Number</dt><dd class="pink">@Html.DisplayFor(model => model.Patient.Id) &nbsp;</dd>
+                    <dt>Name</dt><dd class="pink">@Html.DisplayFor(model => model.Patient.Profile.FirstName) &nbsp;</dd>
+                    <dt>Address</dt><dd class="pink">@Html.DisplayFor(model => model.Patient.FormattedAddress) &nbsp;</dd>
+                    <dt>D.O.B.</dt><dd class="pink">@Html.DisplayFor(model => model.Patient.Profile.DOB) &nbsp;</dd>
+                    <dt>PHONE</dt><dd class="pink">@Html.DisplayFor(model => model.Patient.FormattedPhone)</dd>
+                </dl>
+            </div>
+            <div class="box2">
+                <div class="img-wrapper img-wrapper-heart"></div>
+            </div>
+        </li>
+        @if (Model.HasProcedure)
+        {
+            <li>
+                <div class="box1">
+                    <h3>YOUR PROCEDURE</h3>
+                    <h5 class="pink">@Model.PatientProcedure.Detail</h5>
+                </div>
+                <div class="box2">
+                    @Html.ImageFor(model => model.PatientProcedure.Procedure.PicturePath, null, false, "noPic", 64, 64)
+                </div>
+                <p class="desc">
+                    @Model.PatientProcedure.Procedure.Description
+                </p>   
+            </li>
+            <li>
+                <div class="box1">
+                    <h3>YOUR DOCTOR</h3>
+                    <h5 class="pink">DR @Model.Doctor.FullName</h5>
+                </div>
+                <div class="box2">
+                    @Html.ImageFor(model => model.Doctor.PicPath, null, false, "noPic", 64, 64)
+                </div>
+                <p class="desc">
+                    @Model.Doctor.Description
+                </p>   
+            </li>
+        }
+        else
+        {
+            <li>
+                <h3>You haven't any scheduled procedures</h3>
+            </li>
+        }
+    </ul>
+</div>
