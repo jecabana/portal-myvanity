@@ -1,7 +1,0 @@
-﻿@using MyVanity.Common
-@model DateTime?
-
-@if (Model.HasValue)
-{
-    @Html.Raw(Model.Value.ToString(Conventions.ShortDateFormat))
-}
